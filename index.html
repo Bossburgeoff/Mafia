@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mafia-2026</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">M</div>
+            <div>
+                <strong>MAFIA</strong>
+                <span>Mafia-2026</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <button class="menu-item active" data-screen="lobby"><span>🏠</span><span>Лобби</span></button>
+            <button class="menu-item" data-screen="roles"><span>🎭</span><span>Роли</span></button>
+            <button class="menu-item" data-screen="cycle"><span>🌙</span><span>Игровой цикл</span></button>
+            <button class="menu-item" data-screen="voting"><span>🗳️</span><span>Голосование</span></button>
+            <button class="menu-item" data-screen="journal"><span>📜</span><span>Журнал</span></button>
+            <button class="menu-item" data-screen="statistics"><span>📊</span><span>Статистика</span></button>
+            <button class="menu-item" data-screen="settings"><span>⚙️</span><span>Настройки</span></button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="connection">
+                <span class="online-dot"></span>
+                <span id="connectionText">Локальный режим</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h1 id="pageTitle">Лобби</h1>
+                <span id="pageSubtitle">Подготовка к игре</span>
+            </div>
+            <div class="room-info">
+                <span>Код комнаты</span>
+                <strong>MAFIA7</strong>
+            </div>
+        </header>
+
+        <!-- ============ ЛОББИ ============ -->
+        <section class="content screen" id="lobbyScreen">
+
+            <div class="status-card">
+                <div>
+                    <span class="status-label">Статус комнаты</span>
+                    <h2 id="roomStatus">Комната создана</h2>
+                    <p id="roomSubstatus">Ожидание игроков</p>
+                </div>
+                <button class="primary-button" id="startGame">▶ Начать игру</button>
+            </div>
+
+            <div class="two-columns">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Игроки</h2>
+                            <p id="playersStatus">6 из 20 участников</p>
+                        </div>
+                        <span class="badge" id="playersBadge">6 игроков</span>
+                    </div>
+
+                    <div class="players-list" id="playersList"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Параметры партии</h2>
+                            <p>Настройки текущей игры</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-list">
+                        <div class="setting-row"><span>Игроков</span><strong id="paramPlayers">6</strong></div>
+                        <div class="setting-row"><span>Мафия</span><strong id="paramMafia">2</strong></div>
+                        <div class="setting-row"><span>Комиссар</span><strong id="paramCommissar">1</strong></div>
+                        <div class="setting-row"><span>Доктор</span><strong id="paramDoctor">1</strong></div>
+                        <div class="setting-row"><span>Мирные жители</span><strong id="paramCitizens">2</strong></div>
+                    </div>
+
+                    <button class="secondary-button" id="openSettings">⚙ Изменить настройки</button>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <span>🎭</span>
+                    <div><strong>Роли</strong><p>4 типа ролей</p></div>
+                </div>
+                <div class="info-card">
+                    <span>☀️</span>
+                    <div><strong>День</strong><p id="infoDay">5 минут</p></div>
+                </div>
+                <div class="info-card">
+                    <span>🌙</span>
+                    <div><strong>Ночь</strong><p id="infoNight">2 минуты</p></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============ РОЛИ ============ -->
+        <section class="content screen hidden" id="rolesScreen">
+
+            <div class="page-heading">
+                <div>
+                    <h2>Роли игроков</h2>
+                    <p>Распределение ролей перед началом игры</p>
+                </div>
+                <button class="primary-button" id="distributeRoles">🎲 Раздать роли</button>
+            </div>
+
+            <div class="roles-summary">
+                <div class="role-summary-card"><span>👥</span><div><strong id="sumPlayers">6</strong><small>Игроков</small></div></div>
+                <div class="role-summary-card"><span>🔴</span><div><strong id="sumMafia">2</strong><small>Мафии</small></div></div>
+                <div class="role-summary-card"><span>🔵</span><div><strong id="sumCommissar">1</strong><small>Комиссар</small></div></div>
+                <div class="role-summary-card"><span>🟢</span><div><strong id="sumDoctor">1</strong><small>Доктор</small></div></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Карточки игроков</h2>
+                        <p>Нажмите на карточку, чтобы посмотреть роль</p>
+                    </div>
+                </div>
+                <div class="roles-grid" id="rolesGrid"></div>
+            </div>
+
+            <div class="panel available-roles">
+                <div class="panel-header">
+                    <div>
+                        <h2>Доступные роли</h2>
+                        <p>Роли, используемые в текущей партии</p>
+                    </div>
+                </div>
+
+                <div class="available-role-list">
+                    <div class="available-role mafia-role">
+                        <span class="available-role-icon">🔴</span>
+                        <div><strong>Мафия</strong><small id="roleListMafia">2 игрока</small></div>
+                    </div>
+                    <div class="available-role commissar-role">
+                        <span class="available-role-icon">🔵</span>
+                        <div><strong>Комиссар</strong><small id="roleListCommissar">1 игрок</small></div>
+                    </div>
+                    <div class="available-role doctor-role">
+                        <span class="available-role-icon">🟢</span>
+                        <div><strong>Доктор</strong><small id="roleListDoctor">1 игрок</small></div>
+                    </div>
+                    <div class="available-role citizen-role">
+                        <span class="available-role-icon">⚪</span>
+                        <div><strong>Мирный житель</strong><small id="roleListCitizens">2 игрока</small></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============ ИГРОВОЙ ЦИКЛ ============ -->
+        <section class="content screen hidden" id="cycleScreen">
+
+            <div class="page-heading">
+                <div>
+                    <h2>Игровой цикл</h2>
+                    <p>Управление текущей фазой игры</p>
+                </div>
+                <span class="phase-badge" id="phaseBadge">🌙 НОЧЬ</span>
+            </div>
+
+            <div class="cycle-main">
+                <div class="phase-card" id="phaseCard">
+                    <span class="phase-icon" id="phaseIcon">🌙</span>
+                    <span class="phase-label">ТЕКУЩАЯ ФАЗА</span>
+                    <h2 id="phaseName">Ночь</h2>
+                    <div class="timer" id="timer">02:00</div>
+                    <p id="phaseDescription">Ночью активные роли выполняют свои действия.</p>
+                    <div class="cycle-buttons">
+                        <button class="primary-button" id="pauseTimer">⏸ Пауза</button>
+                        <button class="secondary-button" id="nextPhase">Следующая фаза →</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Этапы игры</h2>
+                            <p>Последовательность игрового цикла</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline" id="timeline">
+                        <div class="timeline-item active" data-phase="night">
+                            <span>1</span>
+                            <div><strong>Ночь</strong><small id="timelineNight">2 минуты</small></div>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-item" data-phase="day">
+                            <span>2</span>
+                            <div><strong>День</strong><small id="timelineDay">5 минут</small></div>
+                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-item" data-phase="vote">
+                            <span>3</span>
+                            <div><strong>Голосование</strong><small>До завершения</small></div>
+                        </div>
+                    </div>
+
+                    <div class="day-counter">
+                        <span>Раунд</span>
+                        <strong id="dayCounter">1</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- НОЧНЫЕ ДЕЙСТВИЯ -->
+            <div class="panel night-actions" id="nightActionsPanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>🌙 Ночные действия</h2>
+                        <p id="nightActionsHint">Выберите цели для активных ролей</p>
+                    </div>
+                </div>
+
+                <div class="night-actions-grid">
+
+                    <div class="night-role-block mafia-block">
+                        <div class="night-role-header">
+                            <span>🔴</span>
+                            <div>
+                                <strong>Мафия</strong>
+                                <small id="mafiaLabel">Выберите жертву</small>
+                            </div>
+                        </div>
+                        <div class="night-targets" id="mafiaTargets"></div>
+                    </div>
+
+                    <div class="night-role-block commissar-block">
+                        <div class="night-role-header">
+                            <span>🔵</span>
+                            <div>
+                                <strong>Комиссар</strong>
+                                <small id="commissarLabel">Выберите для проверки</small>
+                            </div>
+                        </div>
+                        <div class="night-targets" id="commissarTargets"></div>
+                        <div class="night-result" id="commissarResult"></div>
+                    </div>
+
+                    <div class="night-role-block doctor-block">
+                        <div class="night-role-header">
+                            <span>🟢</span>
+                            <div>
+                                <strong>Доктор</strong>
+                                <small id="doctorLabel">Выберите для лечения</small>
+                            </div>
+                        </div>
+                        <div class="night-targets" id="doctorTargets"></div>
+                    </div>
+
+                </div>
+
+                <button class="primary-button night-confirm" id="confirmNight">
+                    ✓ Завершить ночь
+                </button>
+            </div>
+
+            <!-- ИТОГИ НОЧИ -->
+            <div class="panel night-summary hidden" id="nightSummaryPanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>☀️ Итоги ночи</h2>
+                        <p>Что произошло этой ночью</p>
+                    </div>
+                </div>
+                <div id="nightSummaryContent"></div>
+            </div>
+
+            <div class="panel event-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>События</h2>
+                        <p>Последние действия игры</p>
+                    </div>
+                </div>
+                <div class="event-list" id="eventList"></div>
+            </div>
+
+        </section>
+
+        <!-- ============ ГОЛОСОВАНИЕ ============ -->
+        <section class="content screen hidden" id="votingScreen">
+
+            <div class="page-heading">
+                <div>
+                    <h2>Голосование</h2>
+                    <p>Кликните по игроку, чтобы отдать голос</p>
+                </div>
+                <span class="badge" id="votingBadge">0 голосов</span>
+            </div>
+
+            <div class="voting-layout">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Кандидаты</h2>
+                            <p>Текущие результаты голосования</p>
+                        </div>
+                    </div>
+                    <div class="candidate-list" id="candidateList"></div>
+                </div>
+
+                <div class="panel voting-result">
+                    <div class="result-icon">🗳️</div>
+                    <span>ТЕКУЩИЙ ЛИДЕР</span>
+                    <h2 id="votingLeader">—</h2>
+                    <strong id="votingVotes">0 голосов</strong>
+                    <div class="progress"><div id="votingProgress" style="width: 0%;"></div></div>
+                    <p>После завершения голосования игрок с большинством голосов покидает игру.</p>
+                    <button class="primary-button" id="finishVoting">Завершить голосование</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============ ЖУРНАЛ ============ -->
+        <section class="content screen hidden" id="journalScreen">
+
+            <div class="page-heading">
+                <div>
+                    <h2>Журнал игры</h2>
+                    <p>История событий текущей партии</p>
+                </div>
+                <button class="secondary-button" id="clearJournal">Очистить журнал</button>
+            </div>
+
+            <div class="panel">
+                <div class="journal-table" id="journalTable">
+                    <div class="journal-row journal-head">
+                        <span>Время</span>
+                        <span>Фаза</span>
+                        <span>Событие</span>
+                        <span>Игрок</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============ СТАТИСТИКА ============ -->
+        <section class="content screen hidden" id="statisticsScreen">
+
+            <div class="page-heading">
+                <div>
+                    <h2>Статистика</h2>
+                    <p>Результаты и показатели игроков</p>
+                </div>
+                <button class="secondary-button" id="exportStats">📥 Экспорт CSV</button>
+            </div>
+
+            <div class="stats-summary">
+                <div class="stat-card"><span>🎮</span><strong>1</strong><small>Сыграно партий</small></div>
+                <div class="stat-card"><span>👥</span><strong id="statsPlayers">6</strong><small>Игроков</small></div>
+                <div class="stat-card"><span>⏱️</span><strong id="statsMinutes">0</strong><small>Минут игры</small></div>
+                <div class="stat-card"><span>🗳️</span><strong id="statsVotes">0</strong><small>Голосований</small></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Статистика игроков</h2>
+                        <p>Данные текущей партии</p>
+                    </div>
+                </div>
+                <div class="stats-table" id="statsTable">
+                    <div class="stats-row stats-head">
+                        <span>Игрок</span>
+                        <span>Роль</span>
+                        <span>Голосов</span>
+                        <span>Статус</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============ НАСТРОЙКИ ============ -->
+        <section class="content screen hidden" id="settingsScreen">
+
+            <div class="page-heading">
+                <div>
+                    <h2>Настройки</h2>
+                    <p>Параметры игровой комнаты</p>
+                </div>
+                <button class="primary-button" id="saveSettings">✓ Сохранить</button>
+            </div>
+
+            <div class="settings-grid">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Основные параметры</h2>
+                            <p>Настройки партии</p>
+                        </div>
+                    </div>
+
+                    <label class="form-label">
+                        Количество игроков
+                        <input type="number" value="6" min="4" max="20" id="inputPlayers">
+                    </label>
+
+                    <label class="form-label">
+                        Длительность дня, минут
+                        <input type="number" value="5" min="1" max="30" id="inputDay">
+                    </label>
+
+                    <label class="form-label">
+                        Длительность ночи, минут
+                        <input type="number" value="2" min="1" max="15" id="inputNight">
+                    </label>
+
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="inputAutoPhase" checked>
+                        Автоматически переключать фазы
+                    </label>
+
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="inputSound" checked>
+                        Звуковые уведомления
+                    </label>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Роли</h2>
+                            <p>Количество ролей в партии</p>
+                        </div>
+                    </div>
+
+                    <label class="form-label">🔴 Мафия
+                        <input type="number" value="2" min="0" max="10" id="inputMafia">
+                    </label>
+                    <label class="form-label">🔵 Комиссар
+                        <input type="number" value="1" min="0" max="5" id="inputCommissar">
+                    </label>
+                    <label class="form-label">🟢 Доктор
+                        <input type="number" value="1" min="0" max="5" id="inputDoctor">
+                    </label>
+                    <label class="form-label">⚪ Мирные жители
+                        <input type="number" value="2" min="0" max="20" id="inputCitizens">
+                    </label>
+                </div>
+            </div>
+
+            <div class="panel danger-panel">
+                <div>
+                    <h2>Управление комнатой</h2>
+                    <p>Опасные действия для текущей партии</p>
+                </div>
+                <button class="danger-button" id="resetGame">Сбросить игру</button>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- ============ ЭКРАН ПОБЕДЫ (МОДАЛКА) ============ -->
+<div class="game-over-overlay hidden" id="gameOverOverlay">
+    <div class="game-over-card" id="gameOverCard">
+        <div class="game-over-icon" id="gameOverIcon">🏆</div>
+        <h1 id="gameOverTitle">Победа города!</h1>
+        <p id="gameOverText">Все мафиози устранены.</p>
+
+        <div class="game-over-stats" id="gameOverStats"></div>
+
+        <div class="game-over-buttons">
+            <button class="primary-button" id="gameOverRestart">🔄 Новая игра</button>
+            <button class="secondary-button" id="gameOverClose">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
