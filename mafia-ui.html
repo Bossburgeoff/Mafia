@@ -1,0 +1,1757 @@
+Ниже — готовый одностраничный HTML/CSS-макет в стиле картинки. Сохраните код как `index.html` и откройте в браузере.
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мафия — UI макет</title>
+
+  <style>
+    :root {
+      --bg: #020d20;
+      --bg-2: #041a39;
+      --panel: #062653;
+      --panel-2: #08336a;
+      --line: #0b5ea6;
+      --text: #e8f5ff;
+      --muted: #8fb8dd;
+      --blue: #078cf7;
+      --blue-2: #026bd7;
+      --cyan: #16d8ff;
+      --green: #00d8ad;
+      --red: #f3275b;
+      --purple: #9b4dff;
+      --yellow: #ffc92d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 10px;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 50% 0%, #0a315d 0%, transparent 30%),
+        linear-gradient(180deg, #020a18 0%, #001127 100%);
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(220px, 1fr));
+      gap: 12px;
+      max-width: 1900px;
+      margin: 0 auto;
+    }
+
+    .phone {
+      height: 540px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #087bd5;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(0, 116, 255, 0.13), transparent 36%),
+        linear-gradient(180deg, #020d21 0%, #031a37 100%);
+      box-shadow:
+        0 0 0 1px rgba(0, 5, 18, 0.9),
+        0 10px 25px rgba(0, 0, 0, 0.45),
+        inset 0 0 30px rgba(0, 114, 214, 0.07);
+    }
+
+    .statusbar {
+      height: 26px;
+      padding: 8px 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: bold;
+      color: #e8f5ff;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 8px 13px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .brand-icon {
+      font-size: 30px;
+      filter: drop-shadow(0 0 8px rgba(0, 160, 255, 0.6));
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title strong {
+      font-size: 19px;
+    }
+
+    .brand-title span {
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 400;
+      color: #84bde9;
+    }
+
+    .header-action {
+      margin-left: auto;
+      color: #8dcbff;
+      font-size: 20px;
+    }
+
+    .back {
+      width: 23px;
+      height: 23px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #b9e5ff;
+      background: #0a264c;
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .screen {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 7px 12px 10px;
+      scrollbar-width: none;
+    }
+
+    .screen::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card {
+      margin-bottom: 8px;
+      padding: 9px;
+      border: 1px solid rgba(11, 108, 188, 0.45);
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(4, 40, 82, 0.95), rgba(4, 28, 60, 0.95));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    }
+
+    .card-title,
+    .section-title {
+      margin: 0 0 7px;
+      color: #c8e8ff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section-title span {
+      font-weight: 400;
+      color: #65b7ed;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .tiny {
+      font-size: 9px;
+    }
+
+    .small {
+      font-size: 10px;
+    }
+
+    .phase-card {
+      position: relative;
+      min-height: 111px;
+      overflow: hidden;
+    }
+
+    .phase-icon {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 46px;
+      color: #6ac9ff;
+      line-height: 1;
+      text-shadow: 0 0 16px rgba(0, 142, 255, 0.65);
+    }
+
+    .phase-info {
+      margin-left: 60px;
+    }
+
+    .phase-name {
+      margin-top: 2px;
+      color: #45b8ff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .phase-time {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+
+    .progress {
+      height: 8px;
+      overflow: hidden;
+      margin-top: 5px;
+      border-radius: 99px;
+      background: #093363;
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #04b7ff, #087bf9);
+      box-shadow: 0 0 10px rgba(0, 163, 255, 0.75);
+    }
+
+    .role-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 122px;
+      border-color: rgba(250, 35, 90, 0.45);
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255, 0, 75, 0.25), transparent 45%),
+        linear-gradient(135deg, #260e2f, #1b1635);
+    }
+
+    .role-card .role-big-icon {
+      float: left;
+      width: 66px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      margin-right: 8px;
+      color: #ff2462;
+      font-size: 55px;
+      text-shadow: 0 0 18px #ff004c;
+    }
+
+    .role-card h3 {
+      margin: 5px 0 6px;
+      color: #ff4875;
+      font-size: 17px;
+    }
+
+    .role-card p {
+      margin: 0;
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .private-note {
+      clear: both;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-top: 8px;
+      padding: 7px;
+      border-radius: 6px;
+      color: #ffd8e3;
+      font-size: 9px;
+      background: rgba(204, 11, 78, 0.43);
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .role-mini {
+      min-height: 73px;
+      padding: 7px 3px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 7px;
+      text-align: center;
+      font-size: 8px;
+      color: #e3f7ff;
+    }
+
+    .role-mini strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .role-mini i {
+      font-style: normal;
+      font-size: 22px;
+    }
+
+    .citizen {
+      background: linear-gradient(135deg, #005f65, #007c65);
+    }
+
+    .mafia {
+      background: linear-gradient(135deg, #661336, #9d1548);
+    }
+
+    .sheriff {
+      background: linear-gradient(135deg, #063e94, #1158cc);
+    }
+
+    .doctor {
+      background: linear-gradient(135deg, #4a1577, #6e35c8);
+    }
+
+    .btn {
+      width: 100%;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      background: linear-gradient(135deg, #008cff, #0574eb);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 4px 14px rgba(0, 121, 255, 0.22);
+    }
+
+    .btn.secondary {
+      margin-top: 5px;
+      min-height: 35px;
+      color: #badfff;
+      border: 1px solid #075897;
+      background: linear-gradient(135deg, #06224a, #063568);
+      box-shadow: none;
+    }
+
+    .btn.danger {
+      background: linear-gradient(135deg, #e42d58, #f01451);
+    }
+
+    .room-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 5px 7px;
+      border-radius: 6px;
+      color: #cceeff;
+      background: #0b3b75;
+      font-size: 10px;
+    }
+
+    .room-number {
+      margin-left: auto;
+      padding: 7px 10px;
+      border-radius: 8px;
+      color: #d5f4ff;
+      background: linear-gradient(135deg, #003d86, #0756a1);
+      font-size: 13px;
+    }
+
+    .room-status {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      padding: 9px 3px;
+      border-bottom: 1px solid rgba(47, 131, 203, 0.3);
+    }
+
+    .room-status .room-logo {
+      font-size: 34px;
+      color: #95cdff;
+    }
+
+    .room-status strong {
+      font-size: 13px;
+    }
+
+    .room-status p {
+      margin: 5px 0 0;
+      color: #a9cce8;
+      font-size: 9px;
+    }
+
+    .player-row,
+    .settings-row,
+    .history-row,
+    .stat-row {
+      min-height: 35px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 6px;
+      border-bottom: 1px solid rgba(30, 106, 177, 0.34);
+      font-size: 10px;
+    }
+
+    .player-row:last-child,
+    .settings-row:last-child,
+    .history-row:last-child,
+    .stat-row:last-child {
+      border-bottom: 0;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #e9f9ff;
+      background: linear-gradient(135deg, #1399c7, #0054a5);
+      font-size: 15px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    }
+
+    .avatar.dim {
+      opacity: 0.58;
+      filter: grayscale(0.55);
+    }
+
+    .online {
+      margin-left: auto;
+      color: #00dcbd;
+      font-size: 9px;
+    }
+
+    .offline {
+      margin-left: auto;
+      color: #7591b8;
+      font-size: 9px;
+    }
+
+    .role-choice {
+      min-height: 65px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 7px;
+      padding: 8px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .role-choice .role-symbol {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      font-size: 25px;
+    }
+
+    .role-choice strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .role-choice small {
+      display: block;
+      color: #b6d7ef;
+      font-size: 9px;
+    }
+
+    .role-choice .count {
+      margin-left: auto;
+      align-self: flex-start;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .role-choice .arrow {
+      margin-left: 4px;
+      font-size: 18px;
+    }
+
+    .role-choice.green {
+      border: 1px solid rgba(0, 189, 158, 0.25);
+      background: linear-gradient(135deg, #004e54, #013946);
+      color: #39f0c5;
+    }
+
+    .role-choice.red {
+      border: 1px solid rgba(255, 50, 99, 0.32);
+      background: linear-gradient(135deg, #53102d, #25152c);
+      color: #ff5a80;
+    }
+
+    .role-choice.blue {
+      border: 1px solid rgba(0, 123, 247, 0.32);
+      background: linear-gradient(135deg, #043d80, #03244e);
+      color: #61b9ff;
+    }
+
+    .role-choice.purple {
+      border: 1px solid rgba(161, 91, 255, 0.32);
+      background: linear-gradient(135deg, #42176b, #211747);
+      color: #ce97ff;
+    }
+
+    .role-hero {
+      position: relative;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255, 0, 67, 0.68), transparent 20%),
+        radial-gradient(circle at 50% 42%, rgba(255, 0, 104, 0.22), transparent 43%);
+    }
+
+    .role-hero::before {
+      content: "♠";
+      position: absolute;
+      top: 5px;
+      font-size: 210px;
+      color: rgba(0, 0, 0, 0.36);
+      transform: rotate(180deg);
+    }
+
+    .role-hero .mafia-face {
+      position: relative;
+      z-index: 1;
+      color: #ff1760;
+      font-size: 110px;
+      line-height: 0.8;
+      filter: drop-shadow(0 0 18px rgba(255, 0, 68, 0.8));
+    }
+
+    .role-hero h1 {
+      position: relative;
+      z-index: 1;
+      margin: 12px 0 7px;
+      color: #ff4b74;
+      font-size: 22px;
+    }
+
+    .role-hero p {
+      position: relative;
+      z-index: 1;
+      width: 170px;
+      margin: 0;
+      color: #d5ecff;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .info-list {
+      margin: 0;
+      padding-left: 16px;
+      color: #bcdcf4;
+      font-size: 9px;
+      line-height: 1.75;
+    }
+
+    .night-player {
+      min-height: 39px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 7px;
+      border-bottom: 1px solid rgba(24, 106, 180, 0.34);
+    }
+
+    .night-player:last-child {
+      border-bottom: 0;
+    }
+
+    .tag {
+      margin-left: auto;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 9px;
+    }
+
+    .tag.selected {
+      color: #ffd2de;
+      background: #6c1638;
+    }
+
+    .tag.choice {
+      color: #d4ecff;
+      background: #0b417e;
+    }
+
+    .day-card .phase-icon {
+      color: #ffd031;
+      text-shadow: 0 0 16px rgba(255, 200, 0, 0.6);
+    }
+
+    .day-card .phase-name {
+      color: #ffd12d;
+    }
+
+    .day-card .progress > span {
+      background: linear-gradient(90deg, #ffe329, #ffbe1f);
+    }
+
+    .vote-row {
+      min-height: 37px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px;
+      border-bottom: 1px solid rgba(23, 102, 175, 0.35);
+      cursor: pointer;
+    }
+
+    .vote-row:last-child {
+      border-bottom: 0;
+    }
+
+    .vote-check {
+      width: 15px;
+      height: 15px;
+      margin-left: auto;
+      border: 1px solid #72b8f5;
+      border-radius: 50%;
+    }
+
+    .vote-row.active .vote-check {
+      display: grid;
+      place-items: center;
+      border-color: #05caa9;
+      background: #00b999;
+    }
+
+    .vote-row.active .vote-check::after {
+      content: "✓";
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .tabs {
+      display: flex;
+      overflow: hidden;
+      margin-bottom: 9px;
+      border-radius: 8px;
+      background: #062551;
+    }
+
+    .tabs span {
+      flex: 1;
+      padding: 8px 3px;
+      color: #92c7ed;
+      text-align: center;
+      font-size: 9px;
+    }
+
+    .tabs .active {
+      border-radius: 7px;
+      color: white;
+      background: linear-gradient(135deg, #008eff, #0875e6);
+    }
+
+    .chat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .message {
+      max-width: 89%;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .message.mine {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .bubble {
+      padding: 7px 8px;
+      border-radius: 9px;
+      border-top-left-radius: 2px;
+      color: #e4f3ff;
+      font-size: 9px;
+      line-height: 1.3;
+      background: linear-gradient(135deg, #0c4079, #062a59);
+    }
+
+    .message.mine .bubble {
+      border-top-left-radius: 9px;
+      border-top-right-radius: 2px;
+      background: linear-gradient(135deg, #078dff, #0566d4);
+    }
+
+    .bubble strong,
+    .bubble time {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 9px;
+    }
+
+    .bubble time {
+      float: right;
+      margin-left: 9px;
+      color: #85cdfa;
+      font-size: 8px;
+      font-weight: normal;
+    }
+
+    .chat-input {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 6px;
+      padding: 6px 8px;
+      border: 1px solid #0a4e8c;
+      border-radius: 8px;
+      color: #7caed5;
+      font-size: 9px;
+      background: #031c3d;
+    }
+
+    .send {
+      width: 20px;
+      height: 20px;
+      margin-left: auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: #087def;
+    }
+
+    .stat-icon,
+    .history-icon {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 25px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00a88a, #00715d);
+      font-size: 14px;
+    }
+
+    .stat-row span:last-child {
+      margin-left: auto;
+      color: #b9ddff;
+      font-size: 9px;
+    }
+
+    .switch {
+      width: 31px;
+      height: 18px;
+      position: relative;
+      margin-left: auto;
+      border: 0;
+      border-radius: 20px;
+      cursor: pointer;
+      background: #315779;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d7ecff;
+      transition: 0.2s;
+    }
+
+    .switch.on {
+      background: #008fff;
+    }
+
+    .switch.on::after {
+      left: 16px;
+    }
+
+    .settings-row .setting-icon {
+      width: 21px;
+      text-align: center;
+      color: #9cd6ff;
+      font-size: 18px;
+    }
+
+    .settings-row .value {
+      margin-left: auto;
+      color: #beddf7;
+      font-size: 10px;
+    }
+
+    .history-row {
+      min-height: 49px;
+    }
+
+    .history-row .history-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .history-row strong,
+    .history-row small {
+      display: block;
+    }
+
+    .history-row small {
+      margin-top: 3px;
+      color: #9ec3e1;
+      font-size: 8px;
+    }
+
+    .chevron {
+      color: #75c6fa;
+      font-size: 17px;
+    }
+
+    .bottom-nav {
+      min-height: 51px;
+      display: flex;
+      justify-content: space-around;
+      padding: 6px 4px 4px;
+      border-top: 1px solid rgba(11, 103, 180, 0.6);
+      background: linear-gradient(180deg, rgba(2, 20, 43, 0.82), #03172f);
+    }
+
+    .nav-item {
+      min-width: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #8ac6f3;
+      font-size: 7px;
+      text-align: center;
+    }
+
+    .nav-item b {
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 1;
+    }
+
+    .nav-item.active {
+      color: #03baff;
+    }
+
+    @media (max-width: 1450px) {
+      .app-grid {
+        grid-template-columns: repeat(4, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .app-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 510px) {
+      body {
+        padding: 8px;
+      }
+
+      .app-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone {
+        height: 590px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app-grid">
+
+    <!-- 1. Главная -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="brand-icon">🕵</div>
+        <div class="brand-title">
+          <strong>Мафия</strong>
+          <span>Мафия-2026</span>
+        </div>
+        <div class="header-action">⚙</div>
+      </header>
+
+      <div class="screen">
+        <div class="card phase-card">
+          <div class="phase-icon">☾</div>
+          <div class="phase-info">
+            <div class="small">Текущая фаза</div>
+            <div class="phase-name">Ночь</div>
+          </div>
+          <div class="phase-time">
+            <span>Осталось времени</span>
+            <strong>01:23</strong>
+          </div>
+          <div class="progress"><span style="width: 52%"></span></div>
+        </div>
+
+        <div class="card role-card">
+          <div class="card-title">Ваша роль</div>
+          <div class="role-big-icon">🕵</div>
+          <h3>Мафия</h3>
+          <p>Ваша задача — убить всех мирных жителей.</p>
+          <div class="private-note">◉ Эта карточка видна только вам</div>
+        </div>
+
+        <p class="section-title">Состав ролей <span>(для 15 игроков)</span></p>
+
+        <div class="role-grid">
+          <div class="role-mini citizen">
+            <i>♟</i>
+            <span>Мирный<br>житель</span>
+            <strong>8</strong>
+          </div>
+
+          <div class="role-mini mafia">
+            <i>🕵</i>
+            <span>Мафия</span>
+            <strong>4</strong>
+          </div>
+
+          <div class="role-mini sheriff">
+            <i>✚</i>
+            <span>Комиссар</span>
+            <strong>1</strong>
+          </div>
+
+          <div class="role-mini doctor">
+            <i>✚</i>
+            <span>Доктор</span>
+            <strong>1</strong>
+          </div>
+        </div>
+
+        <div style="height: 9px"></div>
+        <button class="btn">⛓ Присоединиться к комнате</button>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item active"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 2. Лобби -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Лобби</h2>
+      </header>
+
+      <div class="screen">
+        <div class="card">
+          <div class="room-line">
+            <span>⟳ Комната:</span>
+            <span class="pill">7F34</span>
+            <span style="margin-left:auto">♟ Игроки: 5/15</span>
+          </div>
+
+          <div class="room-status">
+            <div class="room-logo">♣</div>
+            <div>
+              <strong>Мафия-2026</strong>
+              <p>Ожидание игроков...</p>
+            </div>
+            <div class="room-number">7F34</div>
+          </div>
+
+          <button class="btn" style="margin-top:8px">⛓ Подключиться к комнате</button>
+          <button class="btn secondary">⊕ Создать комнату</button>
+        </div>
+
+        <p class="section-title">Список игроков</p>
+
+        <div class="card" style="padding: 4px">
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 1
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 2
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 3
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 4
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 5
+            <span class="online">Подключен</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item active"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 3. Выбор роли -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Выбор роли</h2>
+      </header>
+
+      <div class="screen">
+        <p class="section-title">Состав ролей <span>(для 15 игроков)</span></p>
+
+        <div class="role-choice green">
+          <div class="role-symbol" style="background:#00796a">♟</div>
+          <div>
+            <strong>Мирный житель</strong>
+            <small>Просто выжить и помочь найти мафию.</small>
+          </div>
+          <b class="count">8</b>
+          <span class="arrow">›</span>
+        </div>
+
+        <div class="role-choice red">
+          <div class="role-symbol" style="background:#ab1648">🕵</div>
+          <div>
+            <strong>Мафия</strong>
+            <small>Убить всех мирных жителей.</small>
+          </div>
+          <b class="count">4</b>
+          <span class="arrow">›</span>
+        </div>
+
+        <div class="role-choice blue">
+          <div class="role-symbol" style="background:#076acd">✚</div>
+          <div>
+            <strong>Комиссар</strong>
+            <small>Проверять игроков по ночам.</small>
+          </div>
+          <b class="count">1</b>
+          <span class="arrow">›</span>
+        </div>
+
+        <div class="role-choice purple">
+          <div class="role-symbol" style="background:#7134c0">✚</div>
+          <div>
+            <strong>Доктор</strong>
+            <small>Спасти игрока от убийства.</small>
+          </div>
+          <b class="count">1</b>
+          <span class="arrow">›</span>
+        </div>
+
+        <button class="btn" style="margin-top:43px">♟ Начать игру</button>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item active"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 4. Моя роль -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Моя роль</h2>
+      </header>
+
+      <div class="screen">
+        <div class="role-hero">
+          <div class="mafia-face">🕵</div>
+          <h1>Мафия</h1>
+          <p>Ваша задача —<br>убить всех мирных жителей.</p>
+        </div>
+
+        <div class="card">
+          <p class="card-title">ⓘ Помните:</p>
+          <ul class="info-list">
+            <li>Не раскрывайте свою роль.</li>
+            <li>Обсуждайте только в дневное время.</li>
+            <li>Следите за другими игроками.</li>
+          </ul>
+        </div>
+
+        <button class="btn danger" style="margin-top:13px">◉ Скрыть роль</button>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item active"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 5. Ночной ход -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Игровой процесс</h2>
+      </header>
+
+      <div class="screen">
+        <div class="card phase-card">
+          <div class="phase-icon">☾</div>
+          <div class="phase-info">
+            <div class="phase-name">Ночь</div>
+          </div>
+          <div class="phase-time">
+            <span></span>
+            <strong>01:23</strong>
+          </div>
+          <div class="progress"><span style="width: 57%"></span></div>
+        </div>
+
+        <p class="section-title">Действия мафии</p>
+
+        <div class="card" style="padding:4px">
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 2
+            <span class="tag selected">Выбран</span>
+            <span style="color:#ff4774">●</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 5
+            <span class="tag choice">Выбрать</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 8
+            <span class="tag choice">Выбрать</span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:10px">
+          <p class="card-title">ⓘ Выберите игрока для убийства.</p>
+          <p class="tiny muted" style="margin:0 0 0 19px">Выбор можно изменить.</p>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item active"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 6. Дневное голосование -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Игровой процесс</h2>
+      </header>
+
+      <div class="screen">
+        <div class="card phase-card day-card">
+          <div class="phase-icon">☀</div>
+          <div class="phase-info">
+            <div class="phase-name">День</div>
+          </div>
+          <div class="phase-time">
+            <span></span>
+            <strong>02:17</strong>
+          </div>
+          <div class="progress"><span style="width: 72%"></span></div>
+        </div>
+
+        <p class="section-title">Голосование</p>
+
+        <div class="card" style="padding:4px">
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 1
+            <span class="tag" style="background:#005c51;color:#8affe7">За</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 2
+            <span class="tag selected">Против</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 3
+            <span class="tag" style="background:#005c51;color:#8affe7">За</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 4
+            <span class="tag" style="background:#005c51;color:#8affe7">За</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 5
+            <span class="tag selected">Против</span>
+          </div>
+          <div class="night-player">
+            <div class="avatar">♟</div>
+            Игрок 6
+            <span class="tag choice">...</span>
+          </div>
+        </div>
+
+        <button class="btn" style="margin-top:14px">✓ Проголосовать</button>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item active"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 7. Экран голосования -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Голосование</h2>
+      </header>
+
+      <div class="screen">
+        <div class="card phase-card day-card" style="min-height:54px">
+          <div class="phase-icon" style="font-size:37px">☀</div>
+          <div class="phase-info">
+            <div class="phase-name" style="font-size:14px">День</div>
+          </div>
+          <div class="phase-time" style="margin-top:0">
+            <span></span>
+            <strong>01:45</strong>
+          </div>
+          <div class="progress"><span style="width:72%"></span></div>
+        </div>
+
+        <p class="section-title" style="margin-top:12px">Кого выдвинуть?</p>
+
+        <div class="card" style="padding:4px">
+          <div class="vote-row active">
+            <div class="avatar">♟</div>
+            Игрок 1
+            <div class="vote-check"></div>
+          </div>
+          <div class="vote-row">
+            <div class="avatar">♟</div>
+            Игрок 2
+            <div class="vote-check"></div>
+          </div>
+          <div class="vote-row">
+            <div class="avatar">♟</div>
+            Игрок 3
+            <div class="vote-check"></div>
+          </div>
+          <div class="vote-row">
+            <div class="avatar">♟</div>
+            Игрок 4
+            <div class="vote-check"></div>
+          </div>
+          <div class="vote-row">
+            <div class="avatar">♟</div>
+            Игрок 5
+            <div class="vote-check"></div>
+          </div>
+          <div class="vote-row">
+            <div class="avatar">♟</div>
+            Игрок 6
+            <div class="vote-check"></div>
+          </div>
+        </div>
+
+        <button class="btn" style="margin-top:10px">⛓ Голосовать</button>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item active"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 8. Чат -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Чат</h2>
+      </header>
+
+      <div class="screen">
+        <div class="tabs">
+          <span class="active">Общий чат</span>
+          <span>Личные сообщения</span>
+        </div>
+
+        <div class="chat-list">
+          <div class="message">
+            <div class="avatar" style="background:linear-gradient(135deg,#a542e8,#5727a9)">♟</div>
+            <div class="bubble">
+              <strong>Игрок 2 <time>19:42</time></strong>
+              Я думаю, это не он...
+            </div>
+          </div>
+
+          <div class="message">
+            <div class="avatar">♟</div>
+            <div class="bubble">
+              <strong>Игрок 5 <time>19:43</time></strong>
+              Согласен, похоже на мафию.
+            </div>
+          </div>
+
+          <div class="message">
+            <div class="avatar" style="background:linear-gradient(135deg,#00bda8,#006b67)">♟</div>
+            <div class="bubble">
+              <strong>Игрок 4 <time>19:44</time></strong>
+              Давайте голосовать на 3.
+            </div>
+          </div>
+
+          <div class="message mine">
+            <div class="bubble">
+              <strong>Вы <time>19:45</time></strong>
+              Я за 3, он вчера тоже странно себя вёл.
+            </div>
+          </div>
+
+          <div class="message">
+            <div class="avatar" style="background:linear-gradient(135deg,#00bda8,#006b67)">♟</div>
+            <div class="bubble">
+              <strong>Игрок 1 <time>19:45</time></strong>
+              Хорошо, давайте.
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input">
+          Написать сообщение...
+          <span class="send">➤</span>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item active"><b>▣</b>Чат</div>
+        <div class="nav-item"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 9. Участники -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Участники (5/15)</h2>
+      </header>
+
+      <div class="screen">
+        <div class="card" style="padding:4px">
+          <div class="player-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#00b99d,#00695e)">♟</div>
+            Игрок 1
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 2
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#00b99d,#00695e)">♟</div>
+            Игрок 3
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar">♟</div>
+            Игрок 4
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#00b99d,#00695e)">♟</div>
+            Игрок 5
+            <span class="online">Подключен</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar dim">♟</div>
+            Игрок 6
+            <span class="offline">Не в игре</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar dim">♟</div>
+            Игрок 7
+            <span class="offline">Не в игре</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar dim">♟</div>
+            Игрок 8
+            <span class="offline">Не в игре</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar dim">♟</div>
+            Игрок 9
+            <span class="offline">Не в игре</span>
+          </div>
+          <div class="player-row">
+            <div class="avatar dim">♟</div>
+            Игрок 10
+            <span class="offline">Не в игре</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item active"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 10. Статистика -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Статистика</h2>
+      </header>
+
+      <div class="screen">
+        <div class="tabs">
+          <span class="active">Игроки</span>
+          <span>Партии</span>
+        </div>
+
+        <p class="section-title">Топ игроков</p>
+
+        <div class="card" style="padding:4px">
+          <div class="stat-row">
+            <div class="stat-icon">♟</div>
+            Игрок 2
+            <span>6 побед</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon">♟</div>
+            Игрок 5
+            <span>5 побед</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon">♟</div>
+            Игрок 3
+            <span>4 победы</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon">♟</div>
+            Игрок 4
+            <span>3 победы</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon">♟</div>
+            Игрок 1
+            <span>2 победы</span>
+          </div>
+        </div>
+
+        <p class="section-title" style="margin-top:13px">Моя статистика</p>
+
+        <div class="card" style="padding:4px">
+          <div class="stat-row">
+            <span style="font-size:16px">▣</span>
+            Проведено партий
+            <span>12</span>
+          </div>
+          <div class="stat-row">
+            <span style="font-size:16px">♛</span>
+            Побед
+            <span>7 (58%)</span>
+          </div>
+          <div class="stat-row">
+            <span style="font-size:16px">♟</span>
+            Любимая роль
+            <span>Мафия</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item"><b>♟</b>Игроки</div>
+        <div class="nav-item active"><b>▥</b>Статистика</div>
+        <div class="nav-item"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 11. Настройки -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Настройки</h2>
+      </header>
+
+      <div class="screen">
+        <div class="card" style="padding:4px">
+          <div class="settings-row">
+            <div class="setting-icon">🔊</div>
+            Звук уведомлений
+            <button class="switch on" aria-label="Звук уведомлений"></button>
+          </div>
+
+          <div class="settings-row">
+            <div class="setting-icon">⚙</div>
+            Вибрация
+            <button class="switch on" aria-label="Вибрация"></button>
+          </div>
+
+          <div class="settings-row">
+            <div class="setting-icon">♣</div>
+            Тема
+            <span class="value">Тёмная　›</span>
+          </div>
+
+          <div class="settings-row">
+            <div class="setting-icon">♧</div>
+            Язык
+            <span class="value">Русский　›</span>
+          </div>
+        </div>
+
+        <div class="card" style="padding:4px; margin-top:12px">
+          <div class="settings-row">
+            <div class="setting-icon">ⓘ</div>
+            Информация о приложении
+            <span class="value">›</span>
+          </div>
+
+          <div class="settings-row">
+            <div class="setting-icon">⇥</div>
+            Выход из комнаты
+            <span class="value">›</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item active"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+
+    <!-- 12. Журнал партий -->
+    <section class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>▮▮▮ ◔ ▰</span>
+      </div>
+
+      <header class="header">
+        <div class="back">‹</div>
+        <h2>Журнал партий</h2>
+      </header>
+
+      <div class="screen">
+        <div class="tabs">
+          <span class="active">Все</span>
+          <span>Победы</span>
+          <span>Поражения</span>
+        </div>
+
+        <div class="card" style="padding:4px">
+          <div class="history-row">
+            <div class="history-icon">🏆</div>
+            <div class="history-info">
+              <strong>Партия #12</strong>
+              <small>Победа (Мирные) · 12.09.2026 19:42</small>
+            </div>
+            <div class="chevron">›</div>
+          </div>
+
+          <div class="history-row">
+            <div class="history-icon">🏆</div>
+            <div class="history-info">
+              <strong>Партия #11</strong>
+              <small>Победа (Мирные) · 10.09.2026 20:15</small>
+            </div>
+            <div class="chevron">›</div>
+          </div>
+
+          <div class="history-row">
+            <div class="history-icon" style="background:linear-gradient(135deg,#d31c50,#7b133c)">☠</div>
+            <div class="history-info">
+              <strong>Партия #10</strong>
+              <small>Победа (Мафия) · 08.09.2026 19:37</small>
+            </div>
+            <div class="chevron">›</div>
+          </div>
+
+          <div class="history-row">
+            <div class="history-icon">🏆</div>
+            <div class="history-info">
+              <strong>Партия #9</strong>
+              <small>Победа (Мирные) · 05.09.2026 21:08</small>
+            </div>
+            <div class="chevron">›</div>
+          </div>
+
+          <div class="history-row">
+            <div class="history-icon">🏆</div>
+            <div class="history-info">
+              <strong>Партия #8</strong>
+              <small>Победа (Мирные) · 03.09.2026 18:22</small>
+            </div>
+            <div class="chevron">›</div>
+          </div>
+        </div>
+
+        <button class="btn secondary" style="margin-top:9px">⇩ Экспорт в CSV</button>
+      </div>
+
+      <nav class="bottom-nav">
+        <div class="nav-item"><b>⌂</b>Главная</div>
+        <div class="nav-item"><b>▣</b>Чат</div>
+        <div class="nav-item"><b>♟</b>Игроки</div>
+        <div class="nav-item"><b>▥</b>Статистика</div>
+        <div class="nav-item active"><b>☰</b>Ещё</div>
+      </nav>
+    </section>
+  </main>
+
+  <script>
+    // Переключатели в настройках
+    document.querySelectorAll(".switch").forEach((switcher) => {
+      switcher.addEventListener("click", () => {
+        switcher.classList.toggle("on");
+      });
+    });
+
+    // Выбор игрока на экране голосования
+    document.querySelectorAll(".vote-row").forEach((row) => {
+      row.addEventListener("click", () => {
+        const container = row.parentElement;
+        container.querySelectorAll(".vote-row").forEach((item) => {
+          item.classList.remove("active");
+        });
+        row.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
+```
