@@ -1,25 +1,18 @@
-Ниже — готовый одностраничный HTML/CSS-макет в стиле картинки. Сохраните код как `index.html` и откройте в браузере.
 
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Мафия — UI макет</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мафия — локальная игра</title>
 
   <style>
     :root {
       --bg: #020d20;
-      --bg-2: #041a39;
       --panel: #062653;
-      --panel-2: #08336a;
-      --line: #0b5ea6;
       --text: #e8f5ff;
-      --muted: #8fb8dd;
+      --muted: #9abbd8;
       --blue: #078cf7;
-      --blue-2: #026bd7;
-      --cyan: #16d8ff;
       --green: #00d8ad;
       --red: #f3275b;
       --purple: #9b4dff;
@@ -31,317 +24,366 @@
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      padding: 10px;
+      margin: 0;
+      padding: 16px;
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+      font: 15px/1.45 Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at 50% 0%, #0a315d 0%, transparent 30%),
+        radial-gradient(circle at 50% 0%, #0a315d 0%, transparent 35%),
         linear-gradient(180deg, #020a18 0%, #001127 100%);
     }
 
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(220px, 1fr));
-      gap: 12px;
-      max-width: 1900px;
-      margin: 0 auto;
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
-    .phone {
-      height: 540px;
+    button {
+      color: inherit;
+    }
+
+    .app-shell {
+      width: min(1360px, 100%);
+      min-height: calc(100vh - 32px);
+      margin: 0 auto;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #087bd5;
+      border: 1px solid rgba(8, 123, 213, 0.7);
       border-radius: 18px;
       background:
-        radial-gradient(circle at 50% 0%, rgba(0, 116, 255, 0.13), transparent 36%),
-        linear-gradient(180deg, #020d21 0%, #031a37 100%);
-      box-shadow:
-        0 0 0 1px rgba(0, 5, 18, 0.9),
-        0 10px 25px rgba(0, 0, 0, 0.45),
-        inset 0 0 30px rgba(0, 114, 214, 0.07);
+        radial-gradient(circle at 50% 0%, rgba(0, 116, 255, 0.08), transparent 35%),
+        linear-gradient(180deg, #03142c, #031a37);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.4);
     }
 
-    .statusbar {
-      height: 26px;
-      padding: 8px 14px 0;
+    .topbar {
+      min-height: 66px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 10px;
-      font-weight: bold;
-      color: #e8f5ff;
+      gap: 12px;
+      padding: 10px 18px;
+      border-bottom: 1px solid rgba(11, 103, 180, 0.55);
+      background: rgba(2, 16, 36, 0.8);
     }
 
-    .header {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-height: 44px;
-      padding: 8px 13px;
-      font-size: 14px;
-      font-weight: 700;
+      gap: 11px;
     }
 
-    .header h2 {
-      margin: 0;
-      font-size: 14px;
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(29, 162, 255, 0.45);
+      border-radius: 13px;
+      background: linear-gradient(135deg, #07549a, #04254d);
+      font-size: 25px;
     }
 
-    .brand-icon {
-      font-size: 30px;
-      filter: drop-shadow(0 0 8px rgba(0, 160, 255, 0.6));
+    .brand-name strong,
+    .brand-name small {
+      display: block;
     }
 
-    .brand-title {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-title strong {
+    .brand-name strong {
       font-size: 19px;
     }
 
-    .brand-title span {
-      margin-top: 4px;
-      font-size: 10px;
-      font-weight: 400;
-      color: #84bde9;
+    .brand-name small {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
-    .header-action {
-      margin-left: auto;
-      color: #8dcbff;
-      font-size: 20px;
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .back {
-      width: 23px;
-      height: 23px;
+    .local-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #b6d4ec;
+      font-size: 12px;
+    }
+
+    .local-status i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 9px rgba(0, 216, 173, 0.7);
+    }
+
+    .icon-button {
+      width: 39px;
+      height: 39px;
       display: grid;
       place-items: center;
-      border-radius: 50%;
-      color: #b9e5ff;
-      background: #0a264c;
-      font-size: 23px;
-      line-height: 1;
+      border: 1px solid #0b4b83;
+      border-radius: 10px;
+      color: #a8dcff;
+      background: #06264c;
+      cursor: pointer;
+      font-size: 19px;
     }
 
-    .screen {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      padding: 7px 12px 10px;
-      scrollbar-width: none;
+    .icon-button:hover {
+      background: #093768;
     }
 
-    .screen::-webkit-scrollbar {
+    .workspace {
+      min-height: calc(100vh - 100px);
+      display: grid;
+      grid-template-columns: 195px minmax(0, 1fr);
+      gap: 18px;
+      padding: 16px;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 3px;
+    }
+
+    .side-label {
+      margin: 9px 9px 5px;
+      color: #72a5ca;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-link {
+      width: 100%;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: #a9cce7;
+      text-align: left;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .nav-link b {
+      width: 21px;
+      color: #8bc4ed;
+      text-align: center;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    .nav-link:hover {
+      background: rgba(9, 58, 105, 0.5);
+    }
+
+    .nav-link.active {
+      border-color: rgba(9, 130, 229, 0.4);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(0, 140, 255, 0.3), rgba(3, 62, 119, 0.55));
+      box-shadow: inset 3px 0 #078cf7;
+    }
+
+    .nav-link.active b {
+      color: #2bbaff;
+    }
+
+    .sidebar-note {
+      margin-top: 16px;
+      padding: 11px;
+      border: 1px solid rgba(15, 90, 145, 0.45);
+      border-radius: 9px;
+      color: #a1c3de;
+      background: rgba(3, 28, 58, 0.8);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .main-area {
+      min-width: 0;
+      padding-bottom: 10px;
+    }
+
+    .page-head {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .eyebrow {
+      margin-bottom: 3px;
+      color: #72b2df;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .page-head h1 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+
+    .phase-pill {
+      padding: 7px 10px;
+      border: 1px solid rgba(15, 133, 226, 0.42);
+      border-radius: 8px;
+      color: #c5e8ff;
+      background: rgba(5, 43, 83, 0.8);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .mobile-nav {
       display: none;
     }
 
     .card {
-      margin-bottom: 8px;
-      padding: 9px;
-      border: 1px solid rgba(11, 108, 188, 0.45);
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(4, 40, 82, 0.95), rgba(4, 28, 60, 0.95));
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid rgba(11, 108, 188, 0.42);
+      border-radius: 11px;
+      background: linear-gradient(135deg, rgba(4, 40, 82, 0.96), rgba(4, 28, 60, 0.96));
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
     }
 
-    .card-title,
-    .section-title {
-      margin: 0 0 7px;
-      color: #c8e8ff;
-      font-size: 12px;
-      font-weight: 700;
+    .card h2,
+    .card h3 {
+      margin: 0;
     }
 
-    .section-title span {
-      font-weight: 400;
-      color: #65b7ed;
+    .card h2 {
+      font-size: 17px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+    }
+
+    .card + .card {
+      margin-top: 12px;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .muted {
       color: var(--muted);
     }
 
-    .tiny {
-      font-size: 9px;
-    }
-
     .small {
-      font-size: 10px;
+      font-size: 12px;
     }
 
-    .phase-card {
-      position: relative;
-      min-height: 111px;
-      overflow: hidden;
-    }
-
-    .phase-icon {
-      position: absolute;
-      top: 8px;
-      left: 10px;
-      font-size: 46px;
-      color: #6ac9ff;
-      line-height: 1;
-      text-shadow: 0 0 16px rgba(0, 142, 255, 0.65);
-    }
-
-    .phase-info {
-      margin-left: 60px;
-    }
-
-    .phase-name {
-      margin-top: 2px;
-      color: #45b8ff;
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .phase-time {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      font-size: 11px;
-    }
-
-    .progress {
-      height: 8px;
-      overflow: hidden;
-      margin-top: 5px;
-      border-radius: 99px;
-      background: #093363;
-    }
-
-    .progress > span {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #04b7ff, #087bf9);
-      box-shadow: 0 0 10px rgba(0, 163, 255, 0.75);
-    }
-
-    .role-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 122px;
-      border-color: rgba(250, 35, 90, 0.45);
-      background:
-        radial-gradient(circle at 35% 35%, rgba(255, 0, 75, 0.25), transparent 45%),
-        linear-gradient(135deg, #260e2f, #1b1635);
-    }
-
-    .role-card .role-big-icon {
-      float: left;
-      width: 66px;
-      height: 78px;
+    .dashboard-grid {
       display: grid;
-      place-items: center;
-      margin-right: 8px;
-      color: #ff2462;
-      font-size: 55px;
-      text-shadow: 0 0 18px #ff004c;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+      gap: 12px;
     }
 
-    .role-card h3 {
-      margin: 5px 0 6px;
-      color: #ff4875;
-      font-size: 17px;
-    }
-
-    .role-card p {
-      margin: 0;
-      font-size: 10px;
-      line-height: 1.35;
-    }
-
-    .private-note {
-      clear: both;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      margin-top: 8px;
-      padding: 7px;
-      border-radius: 6px;
-      color: #ffd8e3;
-      font-size: 9px;
-      background: rgba(204, 11, 78, 0.43);
-    }
-
-    .role-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-    }
-
-    .role-mini {
-      min-height: 73px;
-      padding: 7px 3px;
+    .welcome-card {
+      position: relative;
+      min-height: 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 7px;
-      text-align: center;
-      font-size: 8px;
-      color: #e3f7ff;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+      padding: 22px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(0, 161, 255, 0.2), transparent 31%),
+        linear-gradient(135deg, #06346a, #031b3a 78%);
     }
 
-    .role-mini strong {
-      display: block;
-      font-size: 16px;
+    .welcome-card::after {
+      content: "♠";
+      position: absolute;
+      top: -38px;
+      right: 10px;
+      color: rgba(72, 160, 232, 0.09);
+      font-size: 205px;
+      pointer-events: none;
     }
 
-    .role-mini i {
-      font-style: normal;
-      font-size: 22px;
+    .welcome-card > * {
+      position: relative;
+      z-index: 1;
     }
 
-    .citizen {
-      background: linear-gradient(135deg, #005f65, #007c65);
+    .welcome-card h2 {
+      max-width: 520px;
+      margin: 7px 0 9px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.15;
     }
 
-    .mafia {
-      background: linear-gradient(135deg, #661336, #9d1548);
+    .welcome-card p {
+      max-width: 510px;
+      margin: 0 0 15px;
+      color: #bad7ed;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .sheriff {
-      background: linear-gradient(135deg, #063e94, #1158cc);
-    }
-
-    .doctor {
-      background: linear-gradient(135deg, #4a1577, #6e35c8);
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .btn {
-      width: 100%;
-      min-height: 38px;
-      display: flex;
+      min-height: 40px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      padding: 9px 14px;
       border: 0;
       border-radius: 8px;
       color: #fff;
-      font-size: 11px;
-      font-weight: bold;
-      cursor: pointer;
       background: linear-gradient(135deg, #008cff, #0574eb);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 4px 14px rgba(0, 121, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 5px 14px rgba(0, 121, 255, 0.18);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .btn:hover:not(:disabled) {
+      filter: brightness(1.12);
+    }
+
+    .btn:disabled {
+      opacity: 0.48;
+      cursor: not-allowed;
+      box-shadow: none;
     }
 
     .btn.secondary {
-      margin-top: 5px;
-      min-height: 35px;
-      color: #badfff;
       border: 1px solid #075897;
+      color: #c1e1fa;
       background: linear-gradient(135deg, #06224a, #063568);
       box-shadow: none;
     }
@@ -350,345 +392,848 @@
       background: linear-gradient(135deg, #e42d58, #f01451);
     }
 
-    .room-line {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-      font-size: 10px;
+    .btn.full {
+      width: 100%;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      padding: 5px 7px;
-      border-radius: 6px;
-      color: #cceeff;
-      background: #0b3b75;
-      font-size: 10px;
+    /* ---------- Иллюстрации ролей ---------- */
+
+    .role-art {
+      display: block;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
     }
 
-    .room-number {
-      margin-left: auto;
-      padding: 7px 10px;
-      border-radius: 8px;
-      color: #d5f4ff;
-      background: linear-gradient(135deg, #003d86, #0756a1);
-      font-size: 13px;
-    }
-
-    .room-status {
-      display: flex;
-      gap: 9px;
-      align-items: center;
-      padding: 9px 3px;
-      border-bottom: 1px solid rgba(47, 131, 203, 0.3);
-    }
-
-    .room-status .room-logo {
-      font-size: 34px;
-      color: #95cdff;
-    }
-
-    .room-status strong {
-      font-size: 13px;
-    }
-
-    .room-status p {
-      margin: 5px 0 0;
-      color: #a9cce8;
-      font-size: 9px;
-    }
-
-    .player-row,
-    .settings-row,
-    .history-row,
-    .stat-row {
-      min-height: 35px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 6px;
-      border-bottom: 1px solid rgba(30, 106, 177, 0.34);
-      font-size: 10px;
-    }
-
-    .player-row:last-child,
-    .settings-row:last-child,
-    .history-row:last-child,
-    .stat-row:last-child {
-      border-bottom: 0;
-    }
-
-    .avatar {
-      width: 24px;
-      height: 24px;
-      flex: 0 0 24px;
+    .role-grid {
       display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: #e9f9ff;
-      background: linear-gradient(135deg, #1399c7, #0054a5);
-      font-size: 15px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
     }
 
-    .avatar.dim {
-      opacity: 0.58;
-      filter: grayscale(0.55);
-    }
-
-    .online {
-      margin-left: auto;
-      color: #00dcbd;
-      font-size: 9px;
-    }
-
-    .offline {
-      margin-left: auto;
-      color: #7591b8;
-      font-size: 9px;
-    }
-
-    .role-choice {
-      min-height: 65px;
+    .role-tile {
+      min-height: 128px;
       display: flex;
-      gap: 10px;
+      flex-direction: column;
       align-items: center;
-      margin-bottom: 7px;
-      padding: 8px;
+      justify-content: space-between;
+      padding: 9px 5px;
+      border: 1px solid transparent;
       border-radius: 9px;
+      text-align: center;
+    }
+
+    .role-tile .role-art {
+      width: 58px;
+      height: 58px;
+      flex: none;
+    }
+
+    .role-tile .role-name {
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .role-tile strong {
+      font-size: 18px;
+    }
+
+    .tone-green {
+      border-color: rgba(0, 189, 158, 0.3);
+      color: #79f2d6;
+      background: linear-gradient(135deg, #00565c, #063a48);
+    }
+
+    .tone-red {
+      border-color: rgba(255, 50, 99, 0.34);
+      color: #ff7896;
+      background: linear-gradient(135deg, #601232, #27152c);
+    }
+
+    .tone-blue {
+      border-color: rgba(0, 123, 247, 0.34);
+      color: #83ccff;
+      background: linear-gradient(135deg, #063e80, #03244e);
+    }
+
+    .tone-purple {
+      border-color: rgba(161, 91, 255, 0.34);
+      color: #d4aaff;
+      background: linear-gradient(135deg, #42176b, #211747);
+    }
+
+    .role-note {
+      margin: 10px 0 0;
+      color: #a1c3de;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .phase-banner {
+      position: relative;
+      min-height: 103px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      overflow: hidden;
+      padding: 13px 15px 20px;
+      border: 1px solid rgba(11, 108, 188, 0.5);
+      border-radius: 11px;
+      background:
+        radial-gradient(circle at 10% 50%, rgba(0, 145, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, #062b59, #041b39);
+    }
+
+    .phase-banner.day {
+      background:
+        radial-gradient(circle at 10% 50%, rgba(255, 195, 35, 0.15), transparent 28%),
+        linear-gradient(135deg, #3b3216, #041b39);
+    }
+
+    .phase-icon {
+      width: 54px;
+      flex: 0 0 54px;
+      color: #6ac9ff;
+      text-align: center;
+      font-size: 43px;
+      text-shadow: 0 0 15px rgba(0, 142, 255, 0.6);
+    }
+
+    .phase-banner.day .phase-icon {
+      color: #ffd031;
+      text-shadow: 0 0 15px rgba(255, 200, 0, 0.45);
+    }
+
+    .phase-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .phase-info small {
+      color: #b1d4ef;
+      font-size: 12px;
+    }
+
+    .phase-info h2 {
+      margin: 2px 0;
+      color: #55bdff;
+      font-size: 24px;
+    }
+
+    .phase-banner.day .phase-info h2 {
+      color: #ffd23a;
+    }
+
+    .phase-info p {
+      margin: 0;
+      color: #bad7ed;
+      font-size: 12px;
+    }
+
+    .phase-timer {
+      min-width: 66px;
+      text-align: right;
+    }
+
+    .phase-timer strong,
+    .phase-timer small {
+      display: block;
+    }
+
+    .phase-timer strong {
+      color: #fff;
+      font-size: 21px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .phase-timer small {
+      color: #a9cce8;
+      font-size: 11px;
+    }
+
+    .progress {
+      height: 7px;
+      position: absolute;
+      right: 15px;
+      bottom: 9px;
+      left: 15px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #092f5c;
+    }
+
+    .progress span {
+      height: 100%;
+      display: block;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #04b7ff, #087bf9);
+      box-shadow: 0 0 9px rgba(0, 163, 255, 0.6);
+      transition: width 0.2s linear;
+    }
+
+    .phase-banner.day .progress span {
+      background: linear-gradient(90deg, #ffe329, #ffbe1f);
+    }
+
+    .private-role {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 13px 15px;
+      border: 1px solid rgba(255, 41, 91, 0.38);
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 0, 75, 0.18), transparent 45%),
+        linear-gradient(135deg, #260e2f, #1b1635);
+    }
+
+    .private-role.tone-green {
+      border-color: rgba(0, 189, 158, 0.35);
+      background: linear-gradient(135deg, #004e54, #013946);
+    }
+
+    .private-role.tone-blue {
+      border-color: rgba(0, 123, 247, 0.35);
+      background: linear-gradient(135deg, #043d80, #03244e);
+    }
+
+    .private-role.tone-purple {
+      border-color: rgba(161, 91, 255, 0.35);
+      background: linear-gradient(135deg, #42176b, #211747);
+    }
+
+    .private-role .role-art {
+      width: 72px;
+      height: 72px;
+      flex: 0 0 72px;
+    }
+
+    .private-role-content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .private-role .eyebrow {
+      margin-bottom: 3px;
+      font-size: 10px;
+    }
+
+    .private-role h2 {
+      margin: 0 0 3px;
+      font-size: 18px;
+    }
+
+    .private-role p {
+      margin: 0;
+      color: #d0e6f5;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .private-chip {
+      padding: 6px 8px;
+      border: 1px solid rgba(207, 232, 255, 0.2);
+      border-radius: 7px;
+      color: #d1eaff;
+      background: rgba(2, 18, 38, 0.4);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .wide-card {
+      grid-column: 1 / -1;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 13px;
+      color: #c2def4;
+      font-size: 14px;
+    }
+
+    .field input,
+    .field select,
+    .chat-composer input {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #0a4e8c;
+      border-radius: 8px;
+      outline: none;
+      color: #e8f5ff;
+      background: #031c3d;
+      font-size: 14px;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .chat-composer input:focus {
+      border-color: #138dea;
+      box-shadow: 0 0 0 3px rgba(0, 140, 247, 0.12);
+    }
+
+    .field select option {
+      color: #e8f5ff;
+      background: #031c3d;
+    }
+
+    .notice {
+      margin: 10px 0;
+      padding: 10px 11px;
+      border: 1px solid rgba(20, 118, 190, 0.45);
+      border-radius: 8px;
+      color: #c1def4;
+      background: rgba(4, 44, 84, 0.7);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .notice.success {
+      border-color: rgba(0, 202, 163, 0.38);
+      color: #c4f6e9;
+      background: rgba(0, 105, 87, 0.24);
+    }
+
+    .notice.warning {
+      border-color: rgba(255, 201, 45, 0.4);
+      color: #ffe8a0;
+      background: rgba(119, 83, 0, 0.18);
+    }
+
+    .game-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .game-phase-wide,
+    .game-role-wide {
+      grid-column: 1 / -1;
+    }
+
+    .game-aside {
+      grid-column: 2;
+      grid-row: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .game-main {
+      grid-column: 1;
+      grid-row: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .action-card p {
+      margin: 7px 0;
+      color: #bfd9ed;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .target-card {
+      min-width: 0;
+      min-height: 59px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px;
+      border: 1px solid rgba(28, 103, 163, 0.58);
+      border-radius: 8px;
+      color: #e2f3ff;
+      text-align: left;
+      background: rgba(3, 30, 63, 0.85);
       cursor: pointer;
     }
 
-    .role-choice .role-symbol {
-      width: 42px;
-      height: 42px;
+    .target-card:hover {
+      border-color: #1889d7;
+      background: rgba(5, 50, 92, 0.9);
+    }
+
+    .target-card.selected {
+      border-color: #00caa9;
+      background: linear-gradient(135deg, rgba(0, 110, 99, 0.65), rgba(3, 40, 69, 0.9));
+      box-shadow: 0 0 0 1px rgba(0, 202, 169, 0.18);
+    }
+
+    .target-card strong,
+    .target-card small {
+      display: block;
+    }
+
+    .target-card strong {
+      overflow: hidden;
+      font-size: 13px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .target-card small {
+      margin-top: 2px;
+      color: #a7c8e3;
+      font-size: 11px;
+    }
+
+    .target-check {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      margin-left: auto;
+      border: 1px solid #70a9d4;
+      border-radius: 50%;
+    }
+
+    .target-card.selected .target-check {
+      border-color: var(--green);
+      background: var(--green);
+      box-shadow: inset 0 0 0 3px #063c46;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
       display: grid;
       place-items: center;
-      border-radius: 13px;
-      font-size: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+      color: #e8f8ff;
+      background: linear-gradient(135deg, #1399c7, #0054a5);
+      font-size: 16px;
+    }
+
+    .avatar.user-avatar {
+      background: linear-gradient(135deg, #00b99d, #00695e);
+    }
+
+    .avatar.dead {
+      opacity: 0.5;
+      filter: grayscale(0.7);
+    }
+
+    .private-strip {
+      margin: 10px 0;
+      padding: 9px 10px;
+      border: 1px solid rgba(255, 53, 103, 0.3);
+      border-radius: 8px;
+      color: #ffc5d3;
+      background: rgba(110, 17, 53, 0.28);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .selection-state {
+      margin-top: 8px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: #b9d9f1;
+      background: rgba(3, 24, 49, 0.7);
+      font-size: 13px;
+    }
+
+    .auto-note {
+      padding: 10px;
+      border: 1px solid rgba(22, 132, 203, 0.32);
+      border-radius: 8px;
+      color: #bfdef4;
+      background: rgba(2, 32, 65, 0.58);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .player-row,
+    .stat-row,
+    .settings-row,
+    .history-row {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 5px 4px;
+      border-bottom: 1px solid rgba(30, 106, 177, 0.3);
+      font-size: 13px;
+    }
+
+    .player-row:last-child,
+    .stat-row:last-child,
+    .settings-row:last-child,
+    .history-row:last-child {
+      border-bottom: 0;
+    }
+
+    .player-row-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .player-status {
+      margin-left: auto;
+      color: #00dcbd;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .player-status.dead {
+      color: #91a5bb;
+    }
+
+    .role-label {
+      padding: 4px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .role-label.hidden-role {
+      color: #b0cce2;
+      background: #0a315d;
+    }
+
+    .role-label.tone-green {
+      color: #a1ffeb;
+      background: rgba(0, 120, 104, 0.42);
+    }
+
+    .role-label.tone-red {
+      color: #ffb1c2;
+      background: rgba(145, 20, 62, 0.45);
+    }
+
+    .role-label.tone-blue {
+      color: #b0e0ff;
+      background: rgba(9, 76, 157, 0.5);
+    }
+
+    .role-label.tone-purple {
+      color: #e0c5ff;
+      background: rgba(97, 42, 159, 0.45);
+    }
+
+    .empty-state {
+      padding: 14px 8px;
+      color: #a3c3dd;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .role-choice {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      padding: 9px;
+      border: 1px solid rgba(63, 144, 202, 0.24);
+      border-radius: 10px;
+    }
+
+    .role-choice .role-art {
+      width: 60px;
+      height: 60px;
+      flex: 0 0 60px;
     }
 
     .role-choice strong {
       display: block;
-      margin-bottom: 4px;
-      font-size: 12px;
+      margin-bottom: 3px;
+      font-size: 14px;
     }
 
     .role-choice small {
-      display: block;
-      color: #b6d7ef;
-      font-size: 9px;
+      color: #c0d9ed;
+      font-size: 12px;
     }
 
     .role-choice .count {
       margin-left: auto;
-      align-self: flex-start;
-      font-size: 12px;
+      font-size: 17px;
+    }
+
+    .journal-card {
+      overflow: hidden;
+      border-color: rgba(31, 156, 226, 0.72);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(0, 170, 255, 0.13), transparent 35%),
+        linear-gradient(135deg, #082e59, #041b39);
+      box-shadow: 0 0 0 1px rgba(0, 124, 202, 0.12), 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .journal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid rgba(76, 167, 222, 0.3);
+    }
+
+    .journal-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e0f4ff;
+      font-size: 17px;
       font-weight: bold;
     }
 
-    .role-choice .arrow {
-      margin-left: 4px;
-      font-size: 18px;
+    .journal-title span {
+      color: #53c6ff;
+      font-size: 20px;
     }
 
-    .role-choice.green {
-      border: 1px solid rgba(0, 189, 158, 0.25);
-      background: linear-gradient(135deg, #004e54, #013946);
-      color: #39f0c5;
+    .journal-count {
+      padding: 4px 7px;
+      border: 1px solid rgba(74, 167, 227, 0.35);
+      border-radius: 6px;
+      color: #c3e8ff;
+      background: rgba(2, 28, 57, 0.7);
+      font-size: 11px;
+      white-space: nowrap;
     }
 
-    .role-choice.red {
-      border: 1px solid rgba(255, 50, 99, 0.32);
-      background: linear-gradient(135deg, #53102d, #25152c);
-      color: #ff5a80;
+    .journal-list {
+      max-height: 390px;
+      overflow-y: auto;
+      padding-right: 3px;
+      scrollbar-color: #17659b transparent;
+      scrollbar-width: thin;
     }
 
-    .role-choice.blue {
-      border: 1px solid rgba(0, 123, 247, 0.32);
-      background: linear-gradient(135deg, #043d80, #03244e);
-      color: #61b9ff;
-    }
-
-    .role-choice.purple {
-      border: 1px solid rgba(161, 91, 255, 0.32);
-      background: linear-gradient(135deg, #42176b, #211747);
-      color: #ce97ff;
-    }
-
-    .role-hero {
+    .journal-entry {
       position: relative;
-      min-height: 250px;
+      display: grid;
+      grid-template-columns: 13px minmax(0, 1fr);
+      gap: 8px;
+      padding: 0 0 11px;
+    }
+
+    .journal-entry:last-child {
+      padding-bottom: 0;
+    }
+
+    .journal-entry:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      bottom: 0;
+      left: 5px;
+      width: 2px;
+      background: rgba(49, 134, 192, 0.45);
+    }
+
+    .journal-dot {
+      width: 11px;
+      height: 11px;
+      position: relative;
+      z-index: 1;
+      margin-top: 3px;
+      border: 2px solid #72d7ff;
+      border-radius: 50%;
+      background: #07528a;
+      box-shadow: 0 0 8px rgba(59, 191, 255, 0.35);
+    }
+
+    .journal-entry.night .journal-dot {
+      border-color: #bd9bff;
+      background: #51318e;
+    }
+
+    .journal-entry.day .journal-dot {
+      border-color: #ffe17b;
+      background: #8a6911;
+    }
+
+    .journal-entry.vote .journal-dot {
+      border-color: #ff8ca6;
+      background: #922343;
+    }
+
+    .journal-entry.result .journal-dot {
+      border-color: #63f0cf;
+      background: #08745f;
+    }
+
+    .journal-entry.latest .journal-dot {
+      box-shadow: 0 0 12px rgba(72, 213, 255, 0.85);
+    }
+
+    .journal-content {
+      min-width: 0;
+      padding: 7px 8px;
+      border: 1px solid rgba(51, 126, 178, 0.3);
+      border-radius: 7px;
+      background: rgba(2, 22, 47, 0.58);
+    }
+
+    .journal-entry.latest .journal-content {
+      border-color: rgba(74, 180, 230, 0.5);
+      background: rgba(4, 41, 76, 0.8);
+    }
+
+    .journal-content time {
+      display: block;
+      margin-bottom: 3px;
+      color: #85c9ef;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .journal-content p {
+      margin: 0;
+      color: #e0effb;
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .vote-result-row {
+      min-height: 41px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      gap: 9px;
+      padding: 6px;
+      border-bottom: 1px solid rgba(30, 106, 177, 0.3);
+      font-size: 13px;
+    }
+
+    .vote-result-row:last-child {
+      border-bottom: 0;
+    }
+
+    .vote-count {
+      margin-left: auto;
+      color: #c7e8ff;
+      font-weight: bold;
+    }
+
+    .result-card {
+      padding: 18px;
+      border-color: rgba(0, 200, 168, 0.42);
       text-align: center;
       background:
-        radial-gradient(circle at 50% 38%, rgba(255, 0, 67, 0.68), transparent 20%),
-        radial-gradient(circle at 50% 42%, rgba(255, 0, 104, 0.22), transparent 43%);
+        radial-gradient(circle at 50% 10%, rgba(0, 209, 171, 0.18), transparent 45%),
+        linear-gradient(135deg, #063d4b, #041b39);
     }
 
-    .role-hero::before {
-      content: "♠";
-      position: absolute;
-      top: 5px;
-      font-size: 210px;
-      color: rgba(0, 0, 0, 0.36);
-      transform: rotate(180deg);
+    .result-card.lost {
+      border-color: rgba(255, 52, 102, 0.4);
+      background:
+        radial-gradient(circle at 50% 10%, rgba(255, 0, 75, 0.16), transparent 45%),
+        linear-gradient(135deg, #40182f, #041b39);
     }
 
-    .role-hero .mafia-face {
-      position: relative;
-      z-index: 1;
-      color: #ff1760;
-      font-size: 110px;
-      line-height: 0.8;
-      filter: drop-shadow(0 0 18px rgba(255, 0, 68, 0.8));
+    .result-icon {
+      margin-bottom: 4px;
+      font-size: 38px;
     }
 
-    .role-hero h1 {
-      position: relative;
-      z-index: 1;
-      margin: 12px 0 7px;
-      color: #ff4b74;
+    .result-card h2 {
+      margin-bottom: 4px;
       font-size: 22px;
     }
 
-    .role-hero p {
-      position: relative;
-      z-index: 1;
-      width: 170px;
+    .result-card p {
       margin: 0;
-      color: #d5ecff;
-      font-size: 10px;
-      line-height: 1.45;
+      color: #c2dcef;
+      font-size: 14px;
     }
 
-    .info-list {
-      margin: 0;
-      padding-left: 16px;
-      color: #bcdcf4;
-      font-size: 9px;
-      line-height: 1.75;
-    }
-
-    .night-player {
-      min-height: 39px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 7px;
-      border-bottom: 1px solid rgba(24, 106, 180, 0.34);
-    }
-
-    .night-player:last-child {
-      border-bottom: 0;
-    }
-
-    .tag {
-      margin-left: auto;
-      padding: 5px 8px;
-      border-radius: 6px;
-      font-size: 9px;
-    }
-
-    .tag.selected {
-      color: #ffd2de;
-      background: #6c1638;
-    }
-
-    .tag.choice {
-      color: #d4ecff;
-      background: #0b417e;
-    }
-
-    .day-card .phase-icon {
-      color: #ffd031;
-      text-shadow: 0 0 16px rgba(255, 200, 0, 0.6);
-    }
-
-    .day-card .phase-name {
-      color: #ffd12d;
-    }
-
-    .day-card .progress > span {
-      background: linear-gradient(90deg, #ffe329, #ffbe1f);
-    }
-
-    .vote-row {
-      min-height: 37px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px;
-      border-bottom: 1px solid rgba(23, 102, 175, 0.35);
-      cursor: pointer;
-    }
-
-    .vote-row:last-child {
-      border-bottom: 0;
-    }
-
-    .vote-check {
-      width: 15px;
-      height: 15px;
-      margin-left: auto;
-      border: 1px solid #72b8f5;
-      border-radius: 50%;
-    }
-
-    .vote-row.active .vote-check {
+    .role-reveal-list {
       display: grid;
-      place-items: center;
-      border-color: #05caa9;
-      background: #00b999;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
     }
 
-    .vote-row.active .vote-check::after {
-      content: "✓";
-      color: #fff;
-      font-size: 10px;
-      font-weight: bold;
+    .role-reveal-item {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid rgba(30, 106, 177, 0.3);
+      border-radius: 8px;
+      background: rgba(2, 24, 51, 0.65);
+      font-size: 12px;
+    }
+
+    .role-reveal-item.dead-player {
+      opacity: 0.7;
+    }
+
+    .role-reveal-item .role-label {
+      margin-left: auto;
     }
 
     .tabs {
       display: flex;
-      overflow: hidden;
-      margin-bottom: 9px;
+      gap: 4px;
+      margin-bottom: 12px;
+      padding: 4px;
       border-radius: 8px;
       background: #062551;
     }
 
-    .tabs span {
+    .tabs button {
+      min-height: 36px;
       flex: 1;
-      padding: 8px 3px;
-      color: #92c7ed;
-      text-align: center;
-      font-size: 9px;
+      padding: 6px 8px;
+      border: 0;
+      border-radius: 6px;
+      color: #b1d5ef;
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
     }
 
-    .tabs .active {
-      border-radius: 7px;
-      color: white;
+    .tabs button.active {
+      color: #fff;
       background: linear-gradient(135deg, #008eff, #0875e6);
     }
 
     .chat-list {
+      min-height: 170px;
+      max-height: 470px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 9px;
+      overflow-y: auto;
+      padding: 4px 2px 10px;
+      scrollbar-color: #0b5ea6 transparent;
+      scrollbar-width: thin;
     }
 
     .message {
-      max-width: 89%;
+      max-width: 88%;
       display: flex;
-      gap: 6px;
       align-items: flex-start;
+      gap: 7px;
     }
 
     .message.mine {
@@ -696,1062 +1241,2604 @@
       flex-direction: row-reverse;
     }
 
-    .bubble {
-      padding: 7px 8px;
-      border-radius: 9px;
+    .message.system-message {
+      max-width: 100%;
+      align-self: center;
+    }
+
+    .message .bubble {
+      min-width: 100px;
+      padding: 8px 10px;
+      border-radius: 8px;
       border-top-left-radius: 2px;
-      color: #e4f3ff;
-      font-size: 9px;
-      line-height: 1.3;
+      color: #e7f4ff;
       background: linear-gradient(135deg, #0c4079, #062a59);
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
     }
 
     .message.mine .bubble {
-      border-top-left-radius: 9px;
+      border-top-left-radius: 8px;
       border-top-right-radius: 2px;
       background: linear-gradient(135deg, #078dff, #0566d4);
     }
 
-    .bubble strong,
-    .bubble time {
-      display: block;
+    .message.system-message .bubble {
+      min-width: 0;
+      border: 1px solid rgba(36, 121, 185, 0.3);
+      border-radius: 8px;
+      color: #c2dcef;
+      background: rgba(4, 32, 65, 0.78);
+      text-align: center;
+    }
+
+    .message-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       margin-bottom: 3px;
-      font-size: 9px;
+      font-size: 12px;
     }
 
-    .bubble time {
-      float: right;
-      margin-left: 9px;
-      color: #85cdfa;
-      font-size: 8px;
-      font-weight: normal;
+    .message-meta time {
+      color: #9bd5f5;
+      font-size: 10px;
     }
 
-    .chat-input {
+    .message .bubble p {
+      margin: 0;
+    }
+
+    .chat-composer {
       display: flex;
       align-items: center;
       gap: 7px;
-      margin-top: 6px;
-      padding: 6px 8px;
-      border: 1px solid #0a4e8c;
-      border-radius: 8px;
-      color: #7caed5;
-      font-size: 9px;
-      background: #031c3d;
+      margin-top: 9px;
     }
 
-    .send {
-      width: 20px;
-      height: 20px;
-      margin-left: auto;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
+    .chat-composer input {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .chat-composer button {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 8px;
       color: #fff;
       background: #087def;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .stat-box {
+      padding: 11px 9px;
+      border: 1px solid rgba(18, 106, 180, 0.38);
+      border-radius: 8px;
+      background: rgba(2, 29, 60, 0.75);
+    }
+
+    .stat-box strong,
+    .stat-box small {
+      display: block;
+    }
+
+    .stat-box strong {
+      color: #e0f4ff;
+      font-size: 22px;
+    }
+
+    .stat-box small {
+      margin-top: 3px;
+      color: #a5c6df;
+      font-size: 12px;
     }
 
     .stat-icon,
     .history-icon {
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
       display: grid;
       place-items: center;
-      flex: 0 0 25px;
       border-radius: 50%;
+      color: #dcffff;
       background: linear-gradient(135deg, #00a88a, #00715d);
-      font-size: 14px;
+      font-size: 15px;
+    }
+
+    .mini-art {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      filter: none;
     }
 
     .stat-row span:last-child {
       margin-left: auto;
-      color: #b9ddff;
-      font-size: 9px;
+      color: #c7e4fb;
+      font-size: 13px;
+    }
+
+    .history-row {
+      min-height: 52px;
+    }
+
+    .history-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .history-info strong,
+    .history-info small {
+      display: block;
+    }
+
+    .history-info strong {
+      font-size: 13px;
+    }
+
+    .history-info small {
+      margin-top: 3px;
+      color: #a9cbe5;
+      font-size: 11px;
+    }
+
+    .chevron {
+      color: #75c6fa;
+      font-size: 19px;
+    }
+
+    .settings-row {
+      min-height: 48px;
+      font-size: 14px;
+    }
+
+    .setting-icon {
+      width: 26px;
+      color: #a8dcff;
+      text-align: center;
+      font-size: 19px;
     }
 
     .switch {
-      width: 31px;
-      height: 18px;
       position: relative;
+      width: 40px;
+      height: 22px;
+      display: inline-block;
       margin-left: auto;
-      border: 0;
-      border-radius: 20px;
-      cursor: pointer;
-      background: #315779;
     }
 
-    .switch::after {
+    .switch input {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+
+    .switch span {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: #315779;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .switch span::before {
       content: "";
       position: absolute;
       top: 3px;
       left: 3px;
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: #d7ecff;
       transition: 0.2s;
     }
 
-    .switch.on {
+    .switch input:checked + span {
       background: #008fff;
     }
 
-    .switch.on::after {
-      left: 16px;
+    .switch input:checked + span::before {
+      transform: translateX(18px);
     }
 
-    .settings-row .setting-icon {
-      width: 21px;
-      text-align: center;
-      color: #9cd6ff;
-      font-size: 18px;
+    .toast {
+      position: fixed;
+      z-index: 20;
+      right: 18px;
+      bottom: 18px;
+      max-width: min(370px, calc(100vw - 36px));
+      padding: 12px 15px;
+      border: 1px solid rgba(48, 154, 230, 0.6);
+      border-radius: 9px;
+      color: #e8f5ff;
+      background: #062b55;
+      box-shadow: 0 9px 28px rgba(0, 0, 0, 0.35);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: 0.2s;
     }
 
-    .settings-row .value {
-      margin-left: auto;
-      color: #beddf7;
-      font-size: 10px;
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .history-row {
-      min-height: 49px;
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid #21a9ff;
+      outline-offset: 2px;
     }
 
-    .history-row .history-info {
-      min-width: 0;
-      flex: 1;
-    }
+    @media (max-width: 900px) {
+      .workspace {
+        grid-template-columns: 165px minmax(0, 1fr);
+        gap: 13px;
+        padding: 13px;
+      }
 
-    .history-row strong,
-    .history-row small {
-      display: block;
-    }
+      .dashboard-grid,
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
 
-    .history-row small {
-      margin-top: 3px;
-      color: #9ec3e1;
-      font-size: 8px;
-    }
+      .wide-card {
+        grid-column: auto;
+      }
 
-    .chevron {
-      color: #75c6fa;
-      font-size: 17px;
-    }
-
-    .bottom-nav {
-      min-height: 51px;
-      display: flex;
-      justify-content: space-around;
-      padding: 6px 4px 4px;
-      border-top: 1px solid rgba(11, 103, 180, 0.6);
-      background: linear-gradient(180deg, rgba(2, 20, 43, 0.82), #03172f);
-    }
-
-    .nav-item {
-      min-width: 35px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      color: #8ac6f3;
-      font-size: 7px;
-      text-align: center;
-    }
-
-    .nav-item b {
-      font-size: 16px;
-      font-weight: normal;
-      line-height: 1;
-    }
-
-    .nav-item.active {
-      color: #03baff;
-    }
-
-    @media (max-width: 1450px) {
-      .app-grid {
-        grid-template-columns: repeat(4, minmax(220px, 1fr));
+      .game-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(270px, 0.82fr);
       }
     }
 
-    @media (max-width: 980px) {
-      .app-grid {
-        grid-template-columns: repeat(2, minmax(220px, 1fr));
-      }
-    }
-
-    @media (max-width: 510px) {
+    @media (max-width: 680px) {
       body {
-        padding: 8px;
+        padding: 0;
       }
 
-      .app-grid {
+      .app-shell {
+        min-height: 100vh;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .topbar {
+        min-height: 60px;
+        padding: 8px 12px;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        font-size: 23px;
+      }
+
+      .brand-name strong {
+        font-size: 17px;
+      }
+
+      .brand-name small {
+        font-size: 11px;
+      }
+
+      .local-status {
+        display: none;
+      }
+
+      .workspace {
+        min-height: 0;
+        display: block;
+        padding: 12px 11px 82px;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .page-head {
+        min-height: 48px;
+        margin-bottom: 10px;
+      }
+
+      .page-head h1 {
+        font-size: 23px;
+      }
+
+      .phase-pill {
+        max-width: 48%;
+        padding: 6px 7px;
+        overflow: hidden;
+        font-size: 11px;
+        text-overflow: ellipsis;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        z-index: 10;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        min-height: 62px;
+        display: flex;
+        justify-content: space-around;
+        padding: 6px 5px calc(6px + env(safe-area-inset-bottom));
+        border-top: 1px solid rgba(11, 103, 180, 0.65);
+        background: linear-gradient(180deg, rgba(2, 20, 43, 0.98), #03172f);
+      }
+
+      .mobile-link {
+        min-width: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        border: 0;
+        border-radius: 7px;
+        color: #9bcbed;
+        background: transparent;
+        cursor: pointer;
+        font-size: 10px;
+      }
+
+      .mobile-link b {
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 1;
+      }
+
+      .mobile-link.active {
+        color: #03baff;
+      }
+
+      .welcome-card {
+        padding: 18px;
+      }
+
+      .welcome-card h2 {
+        font-size: 27px;
+      }
+
+      .game-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .game-phase-wide,
+      .game-role-wide,
+      .game-aside,
+      .game-main {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .game-layout .game-aside {
+        order: 3;
+      }
+
+      .game-layout .game-main {
+        order: 4;
+      }
+
+      .game-layout .game-phase-wide {
+        order: 1;
+      }
+
+      .game-layout .game-role-wide {
+        order: 2;
+      }
+
+      .private-role {
+        gap: 10px;
+        padding: 11px;
+      }
+
+      .private-role .role-art {
+        width: 56px;
+        height: 56px;
+        flex-basis: 56px;
+      }
+
+      .private-role h2 {
+        font-size: 16px;
+      }
+
+      .private-role p {
+        font-size: 12px;
+      }
+
+      .private-chip {
+        font-size: 10px;
+      }
+
+      .toast {
+        right: 10px;
+        bottom: 72px;
+        left: 10px;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .card {
+        padding: 12px;
+      }
+
+      .role-grid {
+        gap: 5px;
+      }
+
+      .role-tile {
+        min-height: 110px;
+        padding: 7px 3px;
+      }
+
+      .role-tile .role-art {
+        width: 46px;
+        height: 46px;
+      }
+
+      .role-tile .role-name {
+        font-size: 10px;
+      }
+
+      .phase-banner {
+        gap: 8px;
+        padding: 11px 11px 19px;
+      }
+
+      .phase-icon {
+        width: 43px;
+        flex-basis: 43px;
+        font-size: 36px;
+      }
+
+      .phase-info h2 {
+        font-size: 21px;
+      }
+
+      .phase-info p {
+        font-size: 11px;
+      }
+
+      .phase-timer {
+        min-width: 55px;
+      }
+
+      .phase-timer strong {
+        font-size: 18px;
+      }
+
+      .role-reveal-list {
         grid-template-columns: 1fr;
-      }
-
-      .phone {
-        height: 590px;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="app-grid">
-
-    <!-- 1. Главная -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="brand-icon">🕵</div>
-        <div class="brand-title">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">🕵</div>
+        <div class="brand-name">
           <strong>Мафия</strong>
-          <span>Мафия-2026</span>
-        </div>
-        <div class="header-action">⚙</div>
-      </header>
-
-      <div class="screen">
-        <div class="card phase-card">
-          <div class="phase-icon">☾</div>
-          <div class="phase-info">
-            <div class="small">Текущая фаза</div>
-            <div class="phase-name">Ночь</div>
-          </div>
-          <div class="phase-time">
-            <span>Осталось времени</span>
-            <strong>01:23</strong>
-          </div>
-          <div class="progress"><span style="width: 52%"></span></div>
-        </div>
-
-        <div class="card role-card">
-          <div class="card-title">Ваша роль</div>
-          <div class="role-big-icon">🕵</div>
-          <h3>Мафия</h3>
-          <p>Ваша задача — убить всех мирных жителей.</p>
-          <div class="private-note">◉ Эта карточка видна только вам</div>
-        </div>
-
-        <p class="section-title">Состав ролей <span>(для 15 игроков)</span></p>
-
-        <div class="role-grid">
-          <div class="role-mini citizen">
-            <i>♟</i>
-            <span>Мирный<br>житель</span>
-            <strong>8</strong>
-          </div>
-
-          <div class="role-mini mafia">
-            <i>🕵</i>
-            <span>Мафия</span>
-            <strong>4</strong>
-          </div>
-
-          <div class="role-mini sheriff">
-            <i>✚</i>
-            <span>Комиссар</span>
-            <strong>1</strong>
-          </div>
-
-          <div class="role-mini doctor">
-            <i>✚</i>
-            <span>Доктор</span>
-            <strong>1</strong>
-          </div>
-        </div>
-
-        <div style="height: 9px"></div>
-        <button class="btn">⛓ Присоединиться к комнате</button>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item active"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 2. Лобби -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Лобби</h2>
-      </header>
-
-      <div class="screen">
-        <div class="card">
-          <div class="room-line">
-            <span>⟳ Комната:</span>
-            <span class="pill">7F34</span>
-            <span style="margin-left:auto">♟ Игроки: 5/15</span>
-          </div>
-
-          <div class="room-status">
-            <div class="room-logo">♣</div>
-            <div>
-              <strong>Мафия-2026</strong>
-              <p>Ожидание игроков...</p>
-            </div>
-            <div class="room-number">7F34</div>
-          </div>
-
-          <button class="btn" style="margin-top:8px">⛓ Подключиться к комнате</button>
-          <button class="btn secondary">⊕ Создать комнату</button>
-        </div>
-
-        <p class="section-title">Список игроков</p>
-
-        <div class="card" style="padding: 4px">
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 1
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 2
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 3
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 4
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 5
-            <span class="online">Подключен</span>
-          </div>
+          <small>Локальная игра с ботами</small>
         </div>
       </div>
 
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item active"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 3. Выбор роли -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
+      <div class="topbar-right">
+        <div class="local-status"><i></i>Автономный режим</div>
+        <button class="icon-button" type="button" data-page="settings" aria-label="Настройки">⚙</button>
       </div>
+    </header>
 
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Выбор роли</h2>
-      </header>
+    <div class="workspace">
+      <aside class="sidebar">
+        <div class="side-label">ИГРА</div>
+        <button class="nav-link active" type="button" data-page="home"><b>⌂</b>Главная</button>
+        <button class="nav-link" type="button" data-page="lobby"><b>♣</b>Новая партия</button>
+        <button class="nav-link" type="button" data-page="game"><b>☾</b>Игровой процесс</button>
+        <button class="nav-link" type="button" data-page="roles"><b>♟</b>Роли</button>
 
-      <div class="screen">
-        <p class="section-title">Состав ролей <span>(для 15 игроков)</span></p>
+        <div class="side-label">ОБЩЕНИЕ</div>
+        <button class="nav-link" type="button" data-page="chat"><b>▣</b>Чат</button>
+        <button class="nav-link" type="button" data-page="players"><b>♟</b>Участники</button>
+        <button class="nav-link" type="button" data-page="stats"><b>▥</b>Статистика</button>
+        <button class="nav-link" type="button" data-page="settings"><b>☰</b>Настройки</button>
 
-        <div class="role-choice green">
-          <div class="role-symbol" style="background:#00796a">♟</div>
+        <div class="sidebar-note">
+          Партия проходит в этом браузере. Остальные участники — боты.
+          Переключение фаз и подсчёт голосов выполняются автоматически.
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <div class="page-head">
           <div>
-            <strong>Мирный житель</strong>
-            <small>Просто выжить и помочь найти мафию.</small>
+            <div class="eyebrow" id="pageEyebrow">Игровое приложение</div>
+            <h1 id="pageTitle">Главная</h1>
           </div>
-          <b class="count">8</b>
-          <span class="arrow">›</span>
+          <div class="phase-pill" id="phaseBadge">Партия не начата</div>
         </div>
 
-        <div class="role-choice red">
-          <div class="role-symbol" style="background:#ab1648">🕵</div>
-          <div>
-            <strong>Мафия</strong>
-            <small>Убить всех мирных жителей.</small>
-          </div>
-          <b class="count">4</b>
-          <span class="arrow">›</span>
-        </div>
-
-        <div class="role-choice blue">
-          <div class="role-symbol" style="background:#076acd">✚</div>
-          <div>
-            <strong>Комиссар</strong>
-            <small>Проверять игроков по ночам.</small>
-          </div>
-          <b class="count">1</b>
-          <span class="arrow">›</span>
-        </div>
-
-        <div class="role-choice purple">
-          <div class="role-symbol" style="background:#7134c0">✚</div>
-          <div>
-            <strong>Доктор</strong>
-            <small>Спасти игрока от убийства.</small>
-          </div>
-          <b class="count">1</b>
-          <span class="arrow">›</span>
-        </div>
-
-        <button class="btn" style="margin-top:43px">♟ Начать игру</button>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item active"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 4. Моя роль -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Моя роль</h2>
-      </header>
-
-      <div class="screen">
-        <div class="role-hero">
-          <div class="mafia-face">🕵</div>
-          <h1>Мафия</h1>
-          <p>Ваша задача —<br>убить всех мирных жителей.</p>
-        </div>
-
-        <div class="card">
-          <p class="card-title">ⓘ Помните:</p>
-          <ul class="info-list">
-            <li>Не раскрывайте свою роль.</li>
-            <li>Обсуждайте только в дневное время.</li>
-            <li>Следите за другими игроками.</li>
-          </ul>
-        </div>
-
-        <button class="btn danger" style="margin-top:13px">◉ Скрыть роль</button>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item active"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 5. Ночной ход -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Игровой процесс</h2>
-      </header>
-
-      <div class="screen">
-        <div class="card phase-card">
-          <div class="phase-icon">☾</div>
-          <div class="phase-info">
-            <div class="phase-name">Ночь</div>
-          </div>
-          <div class="phase-time">
-            <span></span>
-            <strong>01:23</strong>
-          </div>
-          <div class="progress"><span style="width: 57%"></span></div>
-        </div>
-
-        <p class="section-title">Действия мафии</p>
-
-        <div class="card" style="padding:4px">
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 2
-            <span class="tag selected">Выбран</span>
-            <span style="color:#ff4774">●</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 5
-            <span class="tag choice">Выбрать</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 8
-            <span class="tag choice">Выбрать</span>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:10px">
-          <p class="card-title">ⓘ Выберите игрока для убийства.</p>
-          <p class="tiny muted" style="margin:0 0 0 19px">Выбор можно изменить.</p>
-        </div>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item active"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 6. Дневное голосование -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Игровой процесс</h2>
-      </header>
-
-      <div class="screen">
-        <div class="card phase-card day-card">
-          <div class="phase-icon">☀</div>
-          <div class="phase-info">
-            <div class="phase-name">День</div>
-          </div>
-          <div class="phase-time">
-            <span></span>
-            <strong>02:17</strong>
-          </div>
-          <div class="progress"><span style="width: 72%"></span></div>
-        </div>
-
-        <p class="section-title">Голосование</p>
-
-        <div class="card" style="padding:4px">
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 1
-            <span class="tag" style="background:#005c51;color:#8affe7">За</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 2
-            <span class="tag selected">Против</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 3
-            <span class="tag" style="background:#005c51;color:#8affe7">За</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 4
-            <span class="tag" style="background:#005c51;color:#8affe7">За</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 5
-            <span class="tag selected">Против</span>
-          </div>
-          <div class="night-player">
-            <div class="avatar">♟</div>
-            Игрок 6
-            <span class="tag choice">...</span>
-          </div>
-        </div>
-
-        <button class="btn" style="margin-top:14px">✓ Проголосовать</button>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item active"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 7. Экран голосования -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Голосование</h2>
-      </header>
-
-      <div class="screen">
-        <div class="card phase-card day-card" style="min-height:54px">
-          <div class="phase-icon" style="font-size:37px">☀</div>
-          <div class="phase-info">
-            <div class="phase-name" style="font-size:14px">День</div>
-          </div>
-          <div class="phase-time" style="margin-top:0">
-            <span></span>
-            <strong>01:45</strong>
-          </div>
-          <div class="progress"><span style="width:72%"></span></div>
-        </div>
-
-        <p class="section-title" style="margin-top:12px">Кого выдвинуть?</p>
-
-        <div class="card" style="padding:4px">
-          <div class="vote-row active">
-            <div class="avatar">♟</div>
-            Игрок 1
-            <div class="vote-check"></div>
-          </div>
-          <div class="vote-row">
-            <div class="avatar">♟</div>
-            Игрок 2
-            <div class="vote-check"></div>
-          </div>
-          <div class="vote-row">
-            <div class="avatar">♟</div>
-            Игрок 3
-            <div class="vote-check"></div>
-          </div>
-          <div class="vote-row">
-            <div class="avatar">♟</div>
-            Игрок 4
-            <div class="vote-check"></div>
-          </div>
-          <div class="vote-row">
-            <div class="avatar">♟</div>
-            Игрок 5
-            <div class="vote-check"></div>
-          </div>
-          <div class="vote-row">
-            <div class="avatar">♟</div>
-            Игрок 6
-            <div class="vote-check"></div>
-          </div>
-        </div>
-
-        <button class="btn" style="margin-top:10px">⛓ Голосовать</button>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item active"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 8. Чат -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Чат</h2>
-      </header>
-
-      <div class="screen">
-        <div class="tabs">
-          <span class="active">Общий чат</span>
-          <span>Личные сообщения</span>
-        </div>
-
-        <div class="chat-list">
-          <div class="message">
-            <div class="avatar" style="background:linear-gradient(135deg,#a542e8,#5727a9)">♟</div>
-            <div class="bubble">
-              <strong>Игрок 2 <time>19:42</time></strong>
-              Я думаю, это не он...
-            </div>
-          </div>
-
-          <div class="message">
-            <div class="avatar">♟</div>
-            <div class="bubble">
-              <strong>Игрок 5 <time>19:43</time></strong>
-              Согласен, похоже на мафию.
-            </div>
-          </div>
-
-          <div class="message">
-            <div class="avatar" style="background:linear-gradient(135deg,#00bda8,#006b67)">♟</div>
-            <div class="bubble">
-              <strong>Игрок 4 <time>19:44</time></strong>
-              Давайте голосовать на 3.
-            </div>
-          </div>
-
-          <div class="message mine">
-            <div class="bubble">
-              <strong>Вы <time>19:45</time></strong>
-              Я за 3, он вчера тоже странно себя вёл.
-            </div>
-          </div>
-
-          <div class="message">
-            <div class="avatar" style="background:linear-gradient(135deg,#00bda8,#006b67)">♟</div>
-            <div class="bubble">
-              <strong>Игрок 1 <time>19:45</time></strong>
-              Хорошо, давайте.
-            </div>
-          </div>
-        </div>
-
-        <div class="chat-input">
-          Написать сообщение...
-          <span class="send">➤</span>
-        </div>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item active"><b>▣</b>Чат</div>
-        <div class="nav-item"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 9. Участники -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Участники (5/15)</h2>
-      </header>
-
-      <div class="screen">
-        <div class="card" style="padding:4px">
-          <div class="player-row">
-            <div class="avatar" style="background:linear-gradient(135deg,#00b99d,#00695e)">♟</div>
-            Игрок 1
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 2
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar" style="background:linear-gradient(135deg,#00b99d,#00695e)">♟</div>
-            Игрок 3
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar">♟</div>
-            Игрок 4
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar" style="background:linear-gradient(135deg,#00b99d,#00695e)">♟</div>
-            Игрок 5
-            <span class="online">Подключен</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar dim">♟</div>
-            Игрок 6
-            <span class="offline">Не в игре</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar dim">♟</div>
-            Игрок 7
-            <span class="offline">Не в игре</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar dim">♟</div>
-            Игрок 8
-            <span class="offline">Не в игре</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar dim">♟</div>
-            Игрок 9
-            <span class="offline">Не в игре</span>
-          </div>
-          <div class="player-row">
-            <div class="avatar dim">♟</div>
-            Игрок 10
-            <span class="offline">Не в игре</span>
-          </div>
-        </div>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item active"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 10. Статистика -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Статистика</h2>
-      </header>
-
-      <div class="screen">
-        <div class="tabs">
-          <span class="active">Игроки</span>
-          <span>Партии</span>
-        </div>
-
-        <p class="section-title">Топ игроков</p>
-
-        <div class="card" style="padding:4px">
-          <div class="stat-row">
-            <div class="stat-icon">♟</div>
-            Игрок 2
-            <span>6 побед</span>
-          </div>
-          <div class="stat-row">
-            <div class="stat-icon">♟</div>
-            Игрок 5
-            <span>5 побед</span>
-          </div>
-          <div class="stat-row">
-            <div class="stat-icon">♟</div>
-            Игрок 3
-            <span>4 победы</span>
-          </div>
-          <div class="stat-row">
-            <div class="stat-icon">♟</div>
-            Игрок 4
-            <span>3 победы</span>
-          </div>
-          <div class="stat-row">
-            <div class="stat-icon">♟</div>
-            Игрок 1
-            <span>2 победы</span>
-          </div>
-        </div>
-
-        <p class="section-title" style="margin-top:13px">Моя статистика</p>
-
-        <div class="card" style="padding:4px">
-          <div class="stat-row">
-            <span style="font-size:16px">▣</span>
-            Проведено партий
-            <span>12</span>
-          </div>
-          <div class="stat-row">
-            <span style="font-size:16px">♛</span>
-            Побед
-            <span>7 (58%)</span>
-          </div>
-          <div class="stat-row">
-            <span style="font-size:16px">♟</span>
-            Любимая роль
-            <span>Мафия</span>
-          </div>
-        </div>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item"><b>♟</b>Игроки</div>
-        <div class="nav-item active"><b>▥</b>Статистика</div>
-        <div class="nav-item"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 11. Настройки -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Настройки</h2>
-      </header>
-
-      <div class="screen">
-        <div class="card" style="padding:4px">
-          <div class="settings-row">
-            <div class="setting-icon">🔊</div>
-            Звук уведомлений
-            <button class="switch on" aria-label="Звук уведомлений"></button>
-          </div>
-
-          <div class="settings-row">
-            <div class="setting-icon">⚙</div>
-            Вибрация
-            <button class="switch on" aria-label="Вибрация"></button>
-          </div>
-
-          <div class="settings-row">
-            <div class="setting-icon">♣</div>
-            Тема
-            <span class="value">Тёмная　›</span>
-          </div>
-
-          <div class="settings-row">
-            <div class="setting-icon">♧</div>
-            Язык
-            <span class="value">Русский　›</span>
-          </div>
-        </div>
-
-        <div class="card" style="padding:4px; margin-top:12px">
-          <div class="settings-row">
-            <div class="setting-icon">ⓘ</div>
-            Информация о приложении
-            <span class="value">›</span>
-          </div>
-
-          <div class="settings-row">
-            <div class="setting-icon">⇥</div>
-            Выход из комнаты
-            <span class="value">›</span>
-          </div>
-        </div>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item active"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-
-    <!-- 12. Журнал партий -->
-    <section class="phone">
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>▮▮▮ ◔ ▰</span>
-      </div>
-
-      <header class="header">
-        <div class="back">‹</div>
-        <h2>Журнал партий</h2>
-      </header>
-
-      <div class="screen">
-        <div class="tabs">
-          <span class="active">Все</span>
-          <span>Победы</span>
-          <span>Поражения</span>
-        </div>
-
-        <div class="card" style="padding:4px">
-          <div class="history-row">
-            <div class="history-icon">🏆</div>
-            <div class="history-info">
-              <strong>Партия #12</strong>
-              <small>Победа (Мирные) · 12.09.2026 19:42</small>
-            </div>
-            <div class="chevron">›</div>
-          </div>
-
-          <div class="history-row">
-            <div class="history-icon">🏆</div>
-            <div class="history-info">
-              <strong>Партия #11</strong>
-              <small>Победа (Мирные) · 10.09.2026 20:15</small>
-            </div>
-            <div class="chevron">›</div>
-          </div>
-
-          <div class="history-row">
-            <div class="history-icon" style="background:linear-gradient(135deg,#d31c50,#7b133c)">☠</div>
-            <div class="history-info">
-              <strong>Партия #10</strong>
-              <small>Победа (Мафия) · 08.09.2026 19:37</small>
-            </div>
-            <div class="chevron">›</div>
-          </div>
-
-          <div class="history-row">
-            <div class="history-icon">🏆</div>
-            <div class="history-info">
-              <strong>Партия #9</strong>
-              <small>Победа (Мирные) · 05.09.2026 21:08</small>
-            </div>
-            <div class="chevron">›</div>
-          </div>
-
-          <div class="history-row">
-            <div class="history-icon">🏆</div>
-            <div class="history-info">
-              <strong>Партия #8</strong>
-              <small>Победа (Мирные) · 03.09.2026 18:22</small>
-            </div>
-            <div class="chevron">›</div>
-          </div>
-        </div>
-
-        <button class="btn secondary" style="margin-top:9px">⇩ Экспорт в CSV</button>
-      </div>
-
-      <nav class="bottom-nav">
-        <div class="nav-item"><b>⌂</b>Главная</div>
-        <div class="nav-item"><b>▣</b>Чат</div>
-        <div class="nav-item"><b>♟</b>Игроки</div>
-        <div class="nav-item"><b>▥</b>Статистика</div>
-        <div class="nav-item active"><b>☰</b>Ещё</div>
-      </nav>
-    </section>
-  </main>
+        <div id="appView"></div>
+      </main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Главная навигация">
+      <button class="mobile-link active" type="button" data-page="home"><b>⌂</b>Главная</button>
+      <button class="mobile-link" type="button" data-page="game"><b>☾</b>Игра</button>
+      <button class="mobile-link" type="button" data-page="chat"><b>▣</b>Чат</button>
+      <button class="mobile-link" type="button" data-page="players"><b>♟</b>Игроки</button>
+      <button class="mobile-link" type="button" data-page="stats"><b>▥</b>Статистика</button>
+    </nav>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    // Переключатели в настройках
-    document.querySelectorAll(".switch").forEach((switcher) => {
-      switcher.addEventListener("click", () => {
-        switcher.classList.toggle("on");
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    // Длительность фаз в секундах
+    const PHASE_SECONDS = {
+      night: 60,
+      day: 120,
+      vote: 30,
+      results: 6
+    };
+
+    const ROLE_INFO = {
+      citizen: {
+        name: "Мирный житель",
+        tone: "tone-green",
+        description: "Обсуждайте события и помогите городу найти мафию."
+      },
+      mafia: {
+        name: "Мафия",
+        tone: "tone-red",
+        description: "Ночью выбирайте цель. Днём не выдавайте свою роль."
+      },
+      sheriff: {
+        name: "Комиссар",
+        tone: "tone-blue",
+        description: "Каждую ночь проверяйте одного игрока: мафия он или нет."
+      },
+      doctor: {
+        name: "Доктор",
+        tone: "tone-purple",
+        description: "Каждую ночь выбирайте игрока, которого хотите спасти."
+      }
+    };
+
+    // Иллюстрации ролей (SVG). Каждая функция получает уникальный префикс id,
+    // чтобы градиенты и фильтры не конфликтовали при повторном использовании.
+        const ROLE_ART = {
+citizen: id => `
+  <defs>
+    <radialGradient id="${id}-bg" cx="50%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#3ff0c8"/>
+      <stop offset="1" stop-color="#035c52"/>
+    </radialGradient>
+    <linearGradient id="${id}-coat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4fffb"/>
+      <stop offset="1" stop-color="#7fe6cc"/>
+    </linearGradient>
+    <clipPath id="${id}-clip">
+      <circle cx="60" cy="60" r="56"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="60" cy="60" r="58" fill="url(#${id}-bg)"/>
+  <circle cx="60" cy="60" r="51" fill="none"
+          stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="4 5"/>
+
+  <g clip-path="url(#${id}-clip)">
+    <g transform="translate(0 -8)">
+      <path d="M28 110 C30 89 44 81 60 81 C76 81 90 89 92 110 Z" fill="url(#${id}-coat)"/>
+      <path d="M53 81 L60 93 L67 81 Z" fill="#0b6b5f"/>
+      <rect x="55" y="68" width="10" height="13" rx="2" fill="#ffd9b8"/>
+      <circle cx="60" cy="56" r="13.5" fill="#ffe2c4"/>
+      <path d="M46 53 Q47 38 60 38 Q73 38 74 53 Q68 46 60 46 Q52 46 46 53 Z" fill="#0b3b38"/>
+      <circle cx="55" cy="57" r="1.9" fill="#0b3b38"/>
+      <circle cx="65" cy="57" r="1.9" fill="#0b3b38"/>
+      <path d="M55 63 Q60 66.5 65 63" fill="none" stroke="#b5564a" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="77" cy="95" r="5" fill="#ffd23a" stroke="#fff3c4" stroke-width="1.4"/>
+    </g>
+  </g>
+`,
+
+mafia: id => `
+  <defs>
+    <radialGradient id="${id}-bg" cx="50%" cy="35%" r="75%">
+      <stop offset="0" stop-color="#ff3d72"/>
+      <stop offset="1" stop-color="#4a0a1f"/>
+    </radialGradient>
+    <linearGradient id="${id}-suit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a0a16"/>
+      <stop offset="1" stop-color="#0c0206"/>
+    </linearGradient>
+    <filter id="${id}-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="${id}-clip">
+      <circle cx="60" cy="60" r="56"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="60" cy="60" r="58" fill="url(#${id}-bg)"/>
+  <circle cx="60" cy="60" r="51" fill="none"
+          stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-dasharray="4 5"/>
+
+  <g clip-path="url(#${id}-clip)">
+    <g transform="translate(0 -8)">
+      <path d="M26 114 C28 91 43 84 60 84 C77 84 92 91 94 114 Z" fill="url(#${id}-suit)"/>
+      <path d="M54.5 84 L65.5 84 L60 94.5 Z" fill="#f2f2f2"/>
+      <path d="M57.5 87.5 L62.5 87.5 L65 102 L60 111 L55 102 Z" fill="#ff2e5f"/>
+      <path d="M50 68 Q50 50 60 50 Q70 50 70 68 Q70 81 60 83 Q50 81 50 68 Z" fill="#1d0710"/>
+      <ellipse cx="60" cy="46" rx="31" ry="5.2" fill="#0b0205"/>
+      <path d="M42 46 Q44 27 60 27 Q76 27 78 46 Z" fill="#14040a"/>
+      <rect x="42" y="42" width="36" height="4" rx="1.5" fill="#ff2e5f"/>
+      <g filter="url(#${id}-glow)">
+        <ellipse cx="55.5" cy="64" rx="3.2" ry="1.7" fill="#ff2e5f"/>
+        <ellipse cx="64.5" cy="64" rx="3.2" ry="1.7" fill="#ff2e5f"/>
+      </g>
+      <path d="M55 73.5 Q60 76 65 73.5" fill="none" stroke="#ff8fa9" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+  </g>
+`,
+      sheriff: id => `
+        <defs>
+          <radialGradient id="${id}-bg" cx="50%" cy="30%" r="75%">
+            <stop offset="0" stop-color="#4fb4ff"/>
+            <stop offset="1" stop-color="#02205a"/>
+          </radialGradient>
+          <linearGradient id="${id}-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff3a8"/>
+            <stop offset="1" stop-color="#d89512"/>
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="58" fill="url(#${id}-bg)"/>
+        <circle cx="60" cy="60" r="51" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="4 5"/>
+        <path d="M44 66 L36 116 L50 109 L57 118 L64 66 Z" fill="#1d6fd6"/>
+        <path d="M76 66 L84 116 L70 109 L63 118 L56 66 Z" fill="#1d6fd6"/>
+        <path d="M60 22 L68.2 44.7 L92.3 45.5 L73.3 60.3 L80 83.5 L60 70 L40 83.5 L46.7 60.3 L27.7 45.5 L51.8 44.7 Z"
+              fill="url(#${id}-gold)" stroke="#fff6c8" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="60" cy="54" r="7" fill="#0b3f8f" stroke="#fff6c8" stroke-width="1.5"/>
+      `,
+
+      doctor: id => `
+        <defs>
+          <radialGradient id="${id}-bg" cx="50%" cy="30%" r="75%">
+            <stop offset="0" stop-color="#c58bff"/>
+            <stop offset="1" stop-color="#23094f"/>
+          </radialGradient>
+          <linearGradient id="${id}-cross" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#e2cdff"/>
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="58" fill="url(#${id}-bg)"/>
+        <circle cx="60" cy="60" r="51" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="4 5"/>
+        <path d="M50 26 H70 V46 H90 V66 H70 V86 H50 V66 H30 V46 H50 Z" fill="url(#${id}-cross)"/>
+        <polyline points="16,101 40,101 48,90 56,108 64,94 70,101 104,101"
+                  fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+      `
+    };
+
+    let artCounter = 0;
+
+    function roleArt(role, className = "role-art") {
+      const info = ROLE_INFO[role];
+      if (!info || !ROLE_ART[role]) return "";
+
+      artCounter += 1;
+      const id = `ra${artCounter}`;
+
+      return `
+        <svg class="${className}" viewBox="0 0 120 120" role="img" aria-label="${escapeHTML(info.name)}">
+          ${ROLE_ART[role](id)}
+        </svg>
+      `;
+    }
+
+    const PAGE_TITLES = {
+      home: "Главная",
+      lobby: "Новая партия",
+      game: "Игровой процесс",
+      roles: "Роли",
+      chat: "Чат",
+      players: "Участники",
+      stats: "Статистика",
+      settings: "Настройки"
+    };
+
+    const PHASE_INFO = {
+      night: {
+        name: "Ночь",
+        icon: "☾",
+        description: "Ваше ночное действие выполнится автоматически по таймеру."
+      },
+      day: {
+        name: "День",
+        icon: "☀",
+        description: "Обсуждение. Голосование начнётся автоматически."
+      },
+      vote: {
+        name: "Голосование",
+        icon: "⚖",
+        description: "Выбранный голос будет учтён по окончании таймера."
+      },
+      results: {
+        name: "Итоги голосования",
+        icon: "▤",
+        description: "Следующий раунд начнётся автоматически."
+      }
+    };
+
+    function formatDuration(seconds) {
+      if (seconds >= 60 && seconds % 60 === 0) return `${seconds / 60} мин`;
+      return `${seconds} сек`;
+    }
+
+    function loadData(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveData(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {
+        // Игра продолжит работать, даже если хранилище недоступно.
+      }
+    }
+
+    const config = Object.assign(
+      { name: "Вы", playerCount: 8 },
+      loadData("mafiaConfig", {})
+    );
+
+    config.playerCount = Math.min(15, Math.max(5, Number(config.playerCount) || 8));
+
+    const settings = Object.assign(
+      { sound: false, vibration: false },
+      loadData("mafiaSettings", {})
+    );
+
+    const stats = Object.assign(
+      { played: 0, wins: 0, rolePlayed: {}, roleWins: {} },
+      loadData("mafiaStats", {})
+    );
+
+    stats.rolePlayed = stats.rolePlayed || {};
+    stats.roleWins = stats.roleWins || {};
+
+    let history = loadData("mafiaHistory", []);
+    if (!Array.isArray(history)) history = [];
+
+    let page = "home";
+    let game = null;
+    let toastTimer = null;
+
+    function escapeHTML(value) {
+      const replacements = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      };
+
+      return String(value ?? "").replace(/[&<>"']/g, character => replacements[character]);
+    }
+
+    function timeNow() {
+      return new Date().toLocaleTimeString("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit"
       });
+    }
+
+    function formatDate(value) {
+      return new Date(value).toLocaleString("ru-RU", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function formatClock(seconds) {
+      const safeSeconds = Math.max(0, Math.ceil(seconds));
+      const minutes = Math.floor(safeSeconds / 60);
+      const rest = safeSeconds % 60;
+
+      return `${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
+    }
+
+    function toast(message) {
+      const element = $("#toast");
+      element.textContent = message;
+      element.classList.add("show");
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => element.classList.remove("show"), 2600);
+    }
+
+    function feedback() {
+      if (settings.vibration && navigator.vibrate) {
+        navigator.vibrate(18);
+      }
+
+      if (!settings.sound) return;
+
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+
+        const context = new AudioContextClass();
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+
+        oscillator.frequency.value = 620;
+        gain.gain.value = 0.035;
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        oscillator.start();
+        oscillator.stop(context.currentTime + 0.07);
+        oscillator.onended = () => context.close();
+      } catch {
+        // Звук необязателен.
+      }
+    }
+
+    function roleCounts(total) {
+      let mafia = 1;
+
+      if (total >= 7 && total <= 9) mafia = 2;
+      if (total >= 10 && total <= 12) mafia = 3;
+      if (total >= 13) mafia = 4;
+
+      return {
+        citizen: total - mafia - 2,
+        mafia,
+        sheriff: 1,
+        doctor: 1
+      };
+    }
+
+    function renderRoleTiles(total) {
+      const counts = roleCounts(total);
+
+      return `
+        <div class="role-grid">
+          ${Object.entries(counts).map(([role, count]) => {
+            const info = ROLE_INFO[role];
+
+            return `
+              <div class="role-tile ${info.tone}">
+                ${roleArt(role)}
+                <span class="role-name">${escapeHTML(info.name)}</span>
+                <strong>${count}</strong>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function getAlivePlayers() {
+      return game ? game.players.filter(player => player.alive) : [];
+    }
+
+    function userPlayer() {
+      return game ? game.players.find(player => player.isUser) : null;
+    }
+
+    function randomItem(items) {
+      if (!items || items.length === 0) return null;
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function shuffle(items) {
+      const result = [...items];
+
+      for (let index = result.length - 1; index > 0; index--) {
+        const other = Math.floor(Math.random() * (index + 1));
+        [result[index], result[other]] = [result[other], result[index]];
+      }
+
+      return result;
+    }
+
+    function addMessage(channel, senderId, author, text, system = false) {
+      if (!game) return;
+
+      game.messages.push({
+        channel,
+        senderId,
+        author,
+        text,
+        time: timeNow(),
+        system
+      });
+
+      if (game.messages.length > 180) {
+        game.messages.splice(0, game.messages.length - 180);
+      }
+    }
+
+    function addSystem(text, type = "info") {
+      if (!game) return;
+
+      game.log.push({
+        text,
+        time: timeNow(),
+        type
+      });
+
+      if (game.log.length > 60) game.log.shift();
+
+      addMessage("public", null, "Система", text, true);
+    }
+
+    function phaseSecondsLeft() {
+      if (!game || !game.phaseEndsAt) return 0;
+      return Math.max(0, (game.phaseEndsAt - Date.now()) / 1000);
+    }
+
+    function phaseProgress() {
+      if (!game || !game.phaseStartedAt || !PHASE_SECONDS[game.phase]) return 0;
+
+      const duration = PHASE_SECONDS[game.phase] * 1000;
+      const elapsed = Date.now() - game.phaseStartedAt;
+
+      return Math.min(100, Math.max(0, (elapsed / duration) * 100));
+    }
+
+    function renderPhaseBanner() {
+      if (!game || game.status !== "playing") return "";
+
+      const phase = PHASE_INFO[game.phase];
+      if (!phase) return "";
+
+      const alive = getAlivePlayers().length;
+      const progress = phaseProgress();
+
+      return `
+        <div class="phase-banner ${game.phase === "day" || game.phase === "vote" ? "day" : ""}">
+          <div class="phase-icon">${phase.icon}</div>
+          <div class="phase-info">
+            <small>РАУНД ${game.round} · ${alive} из ${game.players.length} в игре</small>
+            <h2>${phase.name}</h2>
+            <p>${phase.description}</p>
+          </div>
+          <div class="phase-timer">
+            <strong data-phase-clock>${formatClock(phaseSecondsLeft())}</strong>
+            <small>осталось</small>
+          </div>
+          <div class="progress">
+            <span data-phase-progress style="width:${progress}%"></span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRolePanel() {
+      const player = userPlayer();
+      if (!player) return "";
+
+      const info = ROLE_INFO[player.role];
+
+      return `
+        <section class="private-role ${info.tone}">
+          ${roleArt(player.role)}
+          <div class="private-role-content">
+            <div class="eyebrow">ВАША РОЛЬ · ТОЛЬКО ВАМ</div>
+            <h2>${escapeHTML(info.name)}${player.alive ? "" : " · вы выбыли"}</h2>
+            <p>${escapeHTML(info.description)}</p>
+          </div>
+          <span class="private-chip">🔒 Ваша роль</span>
+        </section>
+      `;
+    }
+
+    function renderRecentHistory(limit = 4) {
+      if (history.length === 0) {
+        return `<div class="empty-state">Здесь появятся результаты завершённых партий.</div>`;
+      }
+
+      return history.slice(0, limit).map((item, index) => `
+        <div class="history-row">
+          <div class="history-icon">${item.won ? "🏆" : "☠"}</div>
+          <div class="history-info">
+            <strong>Партия #${history.length - index}</strong>
+            <small>
+              ${escapeHTML(item.result || "")}
+              · ${escapeHTML(ROLE_INFO[item.role]?.name || item.role || "")}
+              · ${escapeHTML(formatDate(item.date))}
+            </small>
+          </div>
+          <span class="chevron">${item.won ? "✓" : "›"}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderHome() {
+      if (!game) {
+        return `
+          <div class="dashboard-grid">
+            <section class="card welcome-card">
+              <div class="eyebrow">Готовы начать?</div>
+              <h2>В городе наступает ночь</h2>
+              <p>
+                Получите случайную роль, принимайте решения ночью и попробуйте вычислить мафию.
+                Вы играете за одного участника, остальные места займут боты.
+              </p>
+              <div class="button-row">
+                <button class="btn" type="button" data-page="lobby">♟ Настроить партию</button>
+                <button class="btn secondary" type="button" data-page="roles">Посмотреть роли</button>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <h2>Состав ролей</h2>
+                <span class="small muted">${config.playerCount} игроков</span>
+              </div>
+              ${renderRoleTiles(config.playerCount)}
+              <p class="role-note">Состав ролей зависит от количества участников.</p>
+            </section>
+
+            <section class="card wide-card">
+              <div class="card-head">
+                <h2>Последние партии</h2>
+                <button class="btn secondary" type="button" data-page="stats">Вся статистика</button>
+              </div>
+              ${renderRecentHistory(3)}
+            </section>
+          </div>
+        `;
+      }
+
+      const alive = getAlivePlayers().length;
+
+      if (game.status === "finished") {
+        const winnerText = game.winner === "mafia" ? "Победила мафия" : "Победили мирные жители";
+
+        return `
+          <div class="dashboard-grid">
+            <section class="card">
+              <div class="card-head">
+                <h2>Партия завершена</h2>
+                <span class="small muted">${game.round} раундов</span>
+              </div>
+              <div class="notice ${game.winner === "mafia" ? "warning" : "success"}">
+                ${escapeHTML(winnerText)}.
+              </div>
+              <div class="button-row">
+                <button class="btn" type="button" data-page="game">Посмотреть результат</button>
+                <button class="btn secondary" type="button" data-page="lobby">Новая партия</button>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <h2>Ваша роль</h2>
+                <span class="small muted">видна только вам</span>
+              </div>
+              ${renderRolePanel()}
+            </section>
+
+            <section class="card wide-card">
+              <div class="card-head">
+                <h2>Последние партии</h2>
+                <button class="btn secondary" type="button" data-page="stats">Статистика</button>
+              </div>
+              ${renderRecentHistory(4)}
+            </section>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="dashboard-grid">
+          <section class="card">
+            <div class="card-head">
+              <h2>Идёт партия</h2>
+              <span class="small muted">${alive} игроков в живых</span>
+            </div>
+            ${renderPhaseBanner()}
+            <div style="height:10px"></div>
+            <div class="button-row">
+              <button class="btn" type="button" data-page="game">Продолжить игру</button>
+              <button class="btn secondary" type="button" data-page="chat">Открыть чат</button>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>Ваша роль</h2>
+              <span class="small muted">видна только вам</span>
+            </div>
+            ${renderRolePanel()}
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>Участники</h2>
+              <button class="btn secondary" type="button" data-page="players">Все игроки</button>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-box"><strong>${game.players.length}</strong><small>всего</small></div>
+              <div class="stat-box"><strong>${alive}</strong><small>в игре</small></div>
+              <div class="stat-box"><strong>${game.players.length - alive}</strong><small>выбыли</small></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>Состав ролей</h2>
+              <button class="btn secondary" type="button" data-page="roles">Подробнее</button>
+            </div>
+            ${renderRoleTiles(game.players.length)}
+          </section>
+
+          <section class="card wide-card">
+            <div class="card-head">
+              <h2>Последние партии</h2>
+              <button class="btn secondary" type="button" data-page="stats">Вся статистика</button>
+            </div>
+            ${renderRecentHistory(3)}
+          </section>
+        </div>
+      `;
+    }
+
+    function renderLobby() {
+      const options = Array.from({ length: 11 }, (_, index) => index + 5)
+        .map(count => `
+          <option value="${count}" ${count === Number(config.playerCount) ? "selected" : ""}>
+            ${count} игроков
+          </option>
+        `).join("");
+
+      const warning = game && game.status === "playing"
+        ? `<div class="notice warning">Если начать новую партию, текущая будет сброшена.</div>`
+        : "";
+
+      return `
+        <div class="two-column">
+          <section class="card">
+            <div class="card-head">
+              <h2>Параметры партии</h2>
+              <span class="small muted">локальная игра</span>
+            </div>
+
+            <label class="field">
+              <span>Ваше имя</span>
+              <input id="playerName" maxlength="20" value="${escapeHTML(config.name)}" placeholder="Например, Алекс">
+            </label>
+
+            <label class="field">
+              <span>Количество участников</span>
+              <select id="playerCount">${options}</select>
+            </label>
+
+            <div class="notice">
+              Ночь — ${formatDuration(PHASE_SECONDS.night)},
+              обсуждение — ${formatDuration(PHASE_SECONDS.day)},
+              голосование — ${formatDuration(PHASE_SECONDS.vote)}.
+              Все переходы между фазами происходят автоматически.
+            </div>
+
+            ${warning}
+            <button class="btn full" type="button" data-action="start-game">♟ Начать игру</button>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>Состав ролей</h2>
+              <span class="small muted" id="lobbyCount">${config.playerCount} игроков</span>
+            </div>
+            <div id="rolePreview">${renderRoleTiles(config.playerCount)}</div>
+            <p class="role-note">
+              Мирные жители побеждают, если найдут всех мафиози.
+              Мафия побеждает, когда её становится не меньше, чем мирных жителей.
+            </p>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderRoles() {
+      const counts = roleCounts(config.playerCount);
+
+      return `
+        <section class="card">
+          <div class="card-head">
+            <h2>Роли в партии</h2>
+            <span class="small muted">для ${config.playerCount} участников</span>
+          </div>
+
+          ${Object.entries(counts).map(([role, count]) => {
+            const info = ROLE_INFO[role];
+
+            return `
+              <div class="role-choice ${info.tone}">
+                ${roleArt(role)}
+                <div style="min-width:0;flex:1">
+                  <strong>${escapeHTML(info.name)}</strong>
+                  <small>${escapeHTML(info.description)}</small>
+                </div>
+                <strong class="count">${count}</strong>
+              </div>
+            `;
+          }).join("")}
+
+          <div class="notice">
+            Роли распределяются случайно. Роли живых игроков скрыты, кроме вашей и ролей вашей команды мафии.
+          </div>
+
+          <button class="btn" type="button" data-page="lobby">Изменить состав партии</button>
+        </section>
+      `;
+    }
+
+    function renderTargetSelection(candidates, selectedId, action, hint) {
+      if (candidates.length === 0) {
+        return `<div class="empty-state">Нет доступных игроков для выбора.</div>`;
+      }
+
+      return `
+        <div class="target-grid">
+          ${candidates.map(player => `
+            <button
+              class="target-card ${selectedId === player.id ? "selected" : ""}"
+              type="button"
+              data-action="${action}"
+              data-id="${escapeHTML(player.id)}"
+            >
+              <span class="avatar ${player.isUser ? "user-avatar" : ""}">
+                ${player.isUser ? "★" : "♟"}
+              </span>
+              <span style="min-width:0;flex:1">
+                <strong>${escapeHTML(player.name)}${player.isUser ? " (вы)" : ""}</strong>
+                <small>${escapeHTML(hint)}</small>
+              </span>
+              <span class="target-check"></span>
+            </button>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderNightAction() {
+      const me = userPlayer();
+      const alive = getAlivePlayers();
+
+      if (!me.alive) {
+        return `
+          <section class="card action-card">
+            <h2>Ночь · вы наблюдаете</h2>
+            <p>Вы выбыли из партии. Остальные игроки сделают ночной ход автоматически.</p>
+            <div class="auto-note">Ночь закончится по таймеру.</div>
+          </section>
+        `;
+      }
+
+      if (me.role === "citizen") {
+        return `
+          <section class="card action-card">
+            <h2>Ночь · вы отдыхаете</h2>
+            <p>У мирного жителя нет ночного действия. Ночь завершится автоматически.</p>
+            <div class="auto-note">Следующая фаза начнётся, когда закончится таймер ночи.</div>
+          </section>
+        `;
+      }
+
+      let candidates = [];
+      let instruction = "";
+      let actionName = "";
+
+      if (me.role === "mafia") {
+        candidates = alive.filter(player => player.role !== "mafia");
+        instruction = "Выберите игрока, которого мафия попытается устранить.";
+        actionName = "Цель мафии";
+      } else if (me.role === "doctor") {
+        candidates = alive;
+        instruction = "Выберите игрока, которого хотите защитить этой ночью.";
+        actionName = "Кого спасти";
+      } else if (me.role === "sheriff") {
+        candidates = alive.filter(player => !player.isUser);
+        instruction = "Выберите игрока для тайной проверки.";
+        actionName = "Кого проверить";
+      }
+
+      const selected = game.players.find(player => player.id === game.nightTarget);
+      const chosenName = selected ? selected.name : "";
+
+      let mafiaTeamNote = "";
+
+      if (me.role === "mafia") {
+        const allies = alive
+          .filter(player => player.role === "mafia" && !player.isUser)
+          .map(player => escapeHTML(player.name));
+
+        mafiaTeamNote = `
+          <div class="private-strip">
+            Ваша команда: вы${allies.length ? `, ${allies.join(", ")}` : ""}.
+            Информация видна только вам.
+          </div>
+        `;
+      }
+
+      return `
+        <section class="card action-card">
+          <div class="card-head">
+            <h2>${actionName}</h2>
+            <span class="small muted">действие выполнится по таймеру</span>
+          </div>
+
+          <p>${instruction}</p>
+          ${mafiaTeamNote}
+
+          ${renderTargetSelection(
+            candidates,
+            game.nightTarget,
+            "select-night-target",
+            "Нажмите, чтобы выбрать"
+          )}
+
+          <div class="selection-state">
+            ${chosenName
+              ? `Вы выбрали: <strong>${escapeHTML(chosenName)}</strong>. Действие применится автоматически.`
+              : "Выберите игрока. Если не успеете, игра выполнит случайное действие."
+            }
+          </div>
+
+          ${me.role === "sheriff" && game.nightTarget
+            ? `<div class="notice">Результат проверки появится после завершения ночи и будет виден только вам.</div>`
+            : ""}
+        </section>
+      `;
+    }
+
+    function renderDayAction() {
+      const me = userPlayer();
+      const result = game.lastNightResult;
+
+      let summary = `<div class="notice">Утро наступило. Ночью никто не выбыл.</div>`;
+
+      if (result && result.type === "death") {
+        summary = `
+          <div class="notice warning">
+            Ночью выбыл игрок <strong>${escapeHTML(result.playerName)}</strong>.
+            Его роль: <strong>${escapeHTML(ROLE_INFO[result.role].name)}</strong>.
+          </div>
+        `;
+      } else if (result && result.type === "safe") {
+        summary = `<div class="notice success">${escapeHTML(result.text)}</div>`;
+      }
+
+      const notes = me.role === "sheriff" && game.privateNotes.length
+        ? `
+          <div class="notice">
+            <strong>Ваши проверки:</strong><br>
+            ${game.privateNotes.slice(-3).map(note => `
+              Ночь ${note.round}: ${escapeHTML(note.name)} — ${escapeHTML(note.result)}.
+            `).join("<br>")}
+          </div>
+        `
+        : "";
+
+      return `
+        <section class="card action-card">
+          <div class="card-head">
+            <h2>Утро в городе</h2>
+            <span class="small muted">обсуждение</span>
+          </div>
+
+          ${summary}
+          ${notes}
+
+          <p>
+            Обсудите события в чате. Когда время обсуждения закончится,
+            голосование начнётся автоматически.
+          </p>
+
+          ${!me.alive
+            ? `<div class="notice">Вы выбыли и не можете голосовать, но можете следить за партией.</div>`
+            : ""
+          }
+
+          <button class="btn secondary" type="button" data-page="chat">▣ Открыть чат</button>
+        </section>
+      `;
+    }
+
+    function renderVoteAction() {
+      const me = userPlayer();
+      const candidates = getAlivePlayers().filter(player => !player.isUser);
+
+      if (!me.alive) {
+        return `
+          <section class="card action-card">
+            <h2>Голосование</h2>
+            <p>Вы выбыли и не голосуете. Голоса остальных участников будут подсчитаны автоматически.</p>
+          </section>
+        `;
+      }
+
+      const selected = game.players.find(player => player.id === game.voteTarget);
+
+      return `
+        <section class="card action-card">
+          <div class="card-head">
+            <h2>Кого выдвинуть?</h2>
+            <span class="small muted">${getAlivePlayers().length} игроков в игре</span>
+          </div>
+
+          <p>Выберите одного игрока. Голос будет учтён автоматически по окончании таймера.</p>
+
+          ${renderTargetSelection(
+            candidates,
+            game.voteTarget,
+            "select-vote-target",
+            "Нажмите, чтобы проголосовать"
+          )}
+
+          <div class="selection-state">
+            ${selected
+              ? `Ваш голос: <strong>${escapeHTML(selected.name)}</strong>. Выбор можно изменить до конца таймера.`
+              : "Вы ещё не выбрали игрока. Если время закончится, голос будет выбран автоматически."
+            }
+          </div>
+        </section>
+      `;
+    }
+
+    function renderVoteResults() {
+      const result = game.lastVoteResult;
+
+      if (!result) {
+        return `
+          <section class="card">
+            <h2>Подсчёт голосов</h2>
+            <p class="muted">Результат появится здесь.</p>
+          </section>
+        `;
+      }
+
+      const rows = [...result.counts].sort((a, b) => b.votes - a.votes);
+
+      return `
+        <section class="card">
+          <div class="card-head">
+            <h2>Результаты голосования</h2>
+            <span class="small muted">раунд ${game.round}</span>
+          </div>
+
+          ${result.tied
+            ? `<div class="notice warning">Ничья. В этом раунде никто не выбыл.</div>`
+            : result.eliminatedName
+              ? `<div class="notice warning">
+                   Выбыл <strong>${escapeHTML(result.eliminatedName)}</strong>.
+                   Его роль: <strong>${escapeHTML(ROLE_INFO[result.eliminatedRole].name)}</strong>.
+                 </div>`
+              : `<div class="notice">Никто не выбыл.</div>`
+          }
+
+          <div class="card" style="padding:4px;background:rgba(2,24,51,.65)">
+            ${rows.map(row => `
+              <div class="vote-result-row">
+                <span class="avatar ${row.isUser ? "user-avatar" : ""}">${row.isUser ? "★" : "♟"}</span>
+                <span>${escapeHTML(row.name)}</span>
+                <span class="vote-count">${row.votes} ${row.votes === 1 ? "голос" : "голосов"}</span>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="notice">
+            Новый раунд начнётся автоматически, когда закончится таймер этой фазы.
+          </div>
+        </section>
+      `;
+    }
+
+    function renderCurrentAction() {
+      if (game.phase === "night") return renderNightAction();
+      if (game.phase === "day") return renderDayAction();
+      if (game.phase === "vote") return renderVoteAction();
+      if (game.phase === "results") return renderVoteResults();
+
+      return "";
+    }
+
+    function renderJournalCard() {
+      const items = game ? [...game.log].slice(-12).reverse() : [];
+
+      if (!items.length) {
+        return `
+          <section class="card journal-card">
+            <div class="journal-head">
+              <div class="journal-title"><span>▤</span>Журнал партии</div>
+              <span class="journal-count">0 событий</span>
+            </div>
+            <div class="empty-state">События появятся после начала игры.</div>
+          </section>
+        `;
+      }
+
+      return `
+        <section class="card journal-card">
+          <div class="journal-head">
+            <div class="journal-title"><span>▤</span>Журнал партии</div>
+            <span class="journal-count">${game.log.length} событий</span>
+          </div>
+
+          <div class="journal-list">
+            ${items.map((item, index) => `
+              <div class="journal-entry ${escapeHTML(item.type || "info")} ${index === 0 ? "latest" : ""}">
+                <span class="journal-dot"></span>
+                <div class="journal-content">
+                  <time>${escapeHTML(item.time)}</time>
+                  <p>${escapeHTML(item.text)}</p>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function canSeeRole(player) {
+      if (!game) return false;
+      if (game.status === "finished" || !player.alive || player.isUser) return true;
+
+      const me = userPlayer();
+      return me && me.role === "mafia" && player.role === "mafia";
+    }
+
+    function renderPlayerList() {
+      if (!game) return "";
+
+      return `
+        <section class="card">
+          <div class="card-head">
+            <h2>Участники</h2>
+            <span class="small muted">${getAlivePlayers().length} в игре</span>
+          </div>
+
+          ${game.players.map(player => {
+            const visible = canSeeRole(player);
+            const role = ROLE_INFO[player.role];
+
+            return `
+              <div class="player-row">
+                <span class="avatar ${player.isUser ? "user-avatar" : ""} ${player.alive ? "" : "dead"}">
+                  ${player.isUser ? "★" : "♟"}
+                </span>
+                <span class="player-row-name">${escapeHTML(player.name)}${player.isUser ? " (вы)" : ""}</span>
+                ${visible
+                  ? `<span class="role-label ${role.tone}">${escapeHTML(role.name)}</span>`
+                  : ""
+                }
+                <span class="player-status ${player.alive ? "" : "dead"}">
+                  ${player.alive ? "В игре" : "Выбыл"}
+                </span>
+              </div>
+            `;
+          }).join("")}
+        </section>
+      `;
+    }
+
+    function renderGame() {
+      if (!game) {
+        return `
+          <section class="card">
+            <h2>Партия ещё не началась</h2>
+            <p class="muted">Настройте количество игроков и начните новую игру.</p>
+            <button class="btn" type="button" data-page="lobby">Перейти в лобби</button>
+          </section>
+        `;
+      }
+
+      if (game.status === "finished") {
+        return renderFinishedGame();
+      }
+
+      return `
+        <div class="game-layout">
+          <div class="game-phase-wide">${renderPhaseBanner()}</div>
+          <div class="game-role-wide">${renderRolePanel()}</div>
+
+          <aside class="game-aside">
+            ${renderJournalCard()}
+          </aside>
+
+          <div class="game-main">
+            ${renderCurrentAction()}
+            ${renderPlayerList()}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFinishedGame() {
+      const me = userPlayer();
+      const userWon =
+        (game.winner === "mafia" && me.role === "mafia") ||
+        (game.winner === "town" && me.role !== "mafia");
+
+      const winnerText = game.winner === "mafia"
+        ? "Победила мафия"
+        : "Победили мирные жители";
+
+      return `
+        <div class="game-layout">
+          <section class="card result-card game-phase-wide ${userWon ? "" : "lost"}">
+            <div class="result-icon">${userWon ? "🏆" : "☠"}</div>
+            <h2>${userWon ? "Ваша команда победила!" : "Ваша команда проиграла"}</h2>
+            <p>${winnerText}. Партия продлилась ${game.round} раундов.</p>
+          </section>
+
+          <div class="game-role-wide">${renderRolePanel()}</div>
+
+          <aside class="game-aside">
+            ${renderJournalCard()}
+          </aside>
+
+          <div class="game-main">
+            <section class="card">
+              <div class="card-head">
+                <h2>Раскрытые роли</h2>
+                <span class="small muted">${game.players.length} игроков</span>
+              </div>
+
+              <div class="role-reveal-list">
+                ${game.players.map(player => `
+                  <div class="role-reveal-item ${player.alive ? "" : "dead-player"}">
+                    <span class="avatar ${player.isUser ? "user-avatar" : ""} ${player.alive ? "" : "dead"}">
+                      ${player.isUser ? "★" : "♟"}
+                    </span>
+                    <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                      ${escapeHTML(player.name)}${player.isUser ? " (вы)" : ""}
+                    </span>
+                    <span class="role-label ${ROLE_INFO[player.role].tone}">
+                      ${escapeHTML(ROLE_INFO[player.role].name)}
+                    </span>
+                  </div>
+                `).join("")}
+              </div>
+            </section>
+
+            <div class="button-row">
+              <button class="btn" type="button" data-action="start-game">↻ Сыграть ещё раз</button>
+              <button class="btn secondary" type="button" data-page="stats">Статистика</button>
+              <button class="btn secondary" type="button" data-page="lobby">Настройки партии</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPlayers() {
+      if (!game) {
+        return `
+          <section class="card">
+            <div class="empty-state">Участников пока нет. Начните партию, чтобы создать список игроков.</div>
+            <button class="btn" type="button" data-page="lobby">Создать партию</button>
+          </section>
+        `;
+      }
+
+      return `
+        <section class="card">
+          <div class="card-head">
+            <h2>Участники (${getAlivePlayers().length}/${game.players.length})</h2>
+            <span class="small muted">${game.status === "finished" ? "партия завершена" : "роли живых игроков скрыты"}</span>
+          </div>
+          ${renderPlayerList()}
+        </section>
+      `;
+    }
+
+    function renderChatMessage(message) {
+      const isMine = message.senderId === "user";
+      const isSystem = message.system;
+
+      return `
+        <div class="message ${isMine ? "mine" : ""} ${isSystem ? "system-message" : ""}">
+          ${!isMine && !isSystem ? `<span class="avatar">♟</span>` : ""}
+          <div class="bubble">
+            <div class="message-meta">
+              <strong>${escapeHTML(message.author)}</strong>
+              <time>${escapeHTML(message.time)}</time>
+            </div>
+            <p>${escapeHTML(message.text)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderChat() {
+      if (!game) {
+        return `
+          <section class="card">
+            <div class="empty-state">Чат откроется после начала партии.</div>
+            <button class="btn" type="button" data-page="lobby">Начать партию</button>
+          </section>
+        `;
+      }
+
+      const me = userPlayer();
+      const mode = game.chatMode || "public";
+      const isMafia = me.role === "mafia";
+      const messages = game.messages.filter(message => message.channel === mode);
+
+      const canSend = game.status === "playing" &&
+        me.alive &&
+        (mode === "mafia"
+          ? isMafia
+          : game.phase === "day");
+
+      return `
+        <section class="card">
+          <div class="tabs">
+            <button
+              type="button"
+              class="${mode === "public" ? "active" : ""}"
+              data-action="chat-mode"
+              data-mode="public"
+            >Общий чат</button>
+
+            ${isMafia ? `
+              <button
+                type="button"
+                class="${mode === "mafia" ? "active" : ""}"
+                data-action="chat-mode"
+                data-mode="mafia"
+              >Чат мафии</button>
+            ` : ""}
+          </div>
+
+          <div class="chat-list" id="chatList">
+            ${messages.length
+              ? messages.map(renderChatMessage).join("")
+              : `<div class="empty-state">Сообщений пока нет.</div>`
+            }
+          </div>
+
+          ${canSend ? `
+            <form class="chat-composer" id="chatForm">
+              <input
+                id="chatInput"
+                maxlength="240"
+                autocomplete="off"
+                placeholder="${mode === "mafia" ? "Сообщение для команды..." : "Написать сообщение..."}"
+                aria-label="Текст сообщения"
+              >
+              <button type="submit" aria-label="Отправить сообщение">➤</button>
+            </form>
+          ` : `
+            <div class="notice">
+              ${game.status === "finished"
+                ? "Партия завершена. Чат доступен только для просмотра."
+                : !me.alive
+                  ? "Вы выбыли и можете только читать сообщения."
+                  : mode === "public"
+                    ? "Общий чат доступен во время дневного обсуждения."
+                    : "Чат мафии доступен живым игрокам-мафиози."
+              }
+            </div>
+          `}
+        </section>
+      `;
+    }
+
+    function renderStats() {
+      const winRate = stats.played
+        ? Math.round((stats.wins / stats.played) * 100)
+        : 0;
+
+      const mostPlayedRole = Object.entries(stats.rolePlayed)
+        .sort((a, b) => b[1] - a[1])[0];
+
+      return `
+        <div class="dashboard-grid">
+          <section class="card wide-card">
+            <div class="card-head">
+              <h2>Моя статистика</h2>
+              <span class="small muted">сохраняется в браузере</span>
+            </div>
+
+            <div class="stat-grid">
+              <div class="stat-box"><strong>${stats.played}</strong><small>сыграно партий</small></div>
+              <div class="stat-box"><strong>${stats.wins}</strong><small>побед</small></div>
+              <div class="stat-box"><strong>${winRate}%</strong><small>процент побед</small></div>
+            </div>
+
+            <div class="notice">
+              Чаще всего вы играли роль:
+              <strong>${mostPlayedRole ? escapeHTML(ROLE_INFO[mostPlayedRole[0]]?.name || mostPlayedRole[0]) : "пока нет данных"}</strong>.
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head"><h2>Победы по ролям</h2></div>
+            ${Object.keys(ROLE_INFO).map(role => `
+              <div class="stat-row">
+                <span class="stat-icon">${roleArt(role, "role-art mini-art")}</span>
+                <span>${escapeHTML(ROLE_INFO[role].name)}</span>
+                <span>${stats.roleWins[role] || 0}</span>
+              </div>
+            `).join("")}
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>Журнал партий</h2>
+              <span class="small muted">${history.length} записей</span>
+            </div>
+            ${history.length
+              ? renderRecentHistory(20)
+              : `<div class="empty-state">Сыграйте первую партию, чтобы увидеть статистику.</div>`
+            }
+          </section>
+        </div>
+      `;
+    }
+
+    function renderSettings() {
+      return `
+        <div class="two-column">
+          <section class="card">
+            <div class="card-head"><h2>Профиль</h2></div>
+
+            <form id="profileForm">
+              <label class="field">
+                <span>Имя игрока</span>
+                <input id="settingName" maxlength="20" value="${escapeHTML(config.name)}">
+              </label>
+              <button class="btn" type="submit">Сохранить имя</button>
+            </form>
+          </section>
+
+          <section class="card">
+            <div class="card-head"><h2>Звук и управление</h2></div>
+
+            <div class="settings-row">
+              <span class="setting-icon">🔊</span>
+              <span>Звуковые сигналы</span>
+              <label class="switch" aria-label="Звуковые сигналы">
+                <input type="checkbox" data-setting="sound" ${settings.sound ? "checked" : ""}>
+                <span></span>
+              </label>
+            </div>
+
+            <div class="settings-row">
+              <span class="setting-icon">▧</span>
+              <span>Вибрация на телефоне</span>
+              <label class="switch" aria-label="Вибрация">
+                <input type="checkbox" data-setting="vibration" ${settings.vibration ? "checked" : ""}>
+                <span></span>
+              </label>
+            </div>
+          </section>
+
+          <section class="card wide-card">
+            <div class="card-head"><h2>Данные приложения</h2></div>
+            <p class="muted">
+              Имя, настройки, статистика и журнал партий хранятся в этом браузере.
+            </p>
+            <button class="btn danger" type="button" data-action="reset-stats">
+              Очистить статистику и журнал
+            </button>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderPage() {
+      switch (page) {
+        case "lobby": return renderLobby();
+        case "game": return renderGame();
+        case "roles": return renderRoles();
+        case "chat": return renderChat();
+        case "players": return renderPlayers();
+        case "stats": return renderStats();
+        case "settings": return renderSettings();
+        default: return renderHome();
+      }
+    }
+
+    function refreshClockUI() {
+      const badge = $("#phaseBadge");
+
+      if (!game) {
+        if (badge) badge.textContent = "Партия не начата";
+        return;
+      }
+
+      if (game.status === "finished") {
+        if (badge) badge.textContent = "Партия завершена";
+        return;
+      }
+
+      const phaseName = PHASE_INFO[game.phase]?.name || "";
+      const seconds = phaseSecondsLeft();
+
+      if (badge) {
+        badge.textContent = `Раунд ${game.round} · ${phaseName} · ${formatClock(seconds)}`;
+      }
+
+      $$("[data-phase-clock]").forEach(element => {
+        element.textContent = formatClock(seconds);
+      });
+
+      const progress = `${phaseProgress()}%`;
+
+      $$("[data-phase-progress]").forEach(element => {
+        element.style.width = progress;
+      });
+    }
+
+    function render() {
+      $("#pageTitle").textContent = PAGE_TITLES[page] || PAGE_TITLES.home;
+      $("#pageEyebrow").textContent = game ? "Локальная партия" : "Игровое приложение";
+      $("#appView").innerHTML = renderPage();
+
+      $$(".nav-link, .mobile-link").forEach(link => {
+        link.classList.toggle("active", link.dataset.page === page);
+      });
+
+      const chatList = $("#chatList");
+      if (chatList) chatList.scrollTop = chatList.scrollHeight;
+
+      refreshClockUI();
+    }
+
+    function createGame() {
+      const total = config.playerCount;
+      const counts = roleCounts(total);
+      const roleDeck = [];
+
+      Object.entries(counts).forEach(([role, count]) => {
+        for (let index = 0; index < count; index++) {
+          roleDeck.push(role);
+        }
+      });
+
+      const botNames = [
+        "Алиса", "Борис", "Вера", "Глеб", "Диана", "Егор", "Жанна",
+        "Илья", "Кира", "Лев", "Мила", "Никита", "Ольга", "Павел"
+      ];
+
+      const players = [{
+        id: "p0",
+        name: config.name.trim() || "Вы",
+        isUser: true,
+        alive: true,
+        role: ""
+      }];
+
+      for (let index = 1; index < total; index++) {
+        players.push({
+          id: `p${index}`,
+          name: botNames[index - 1] || `Игрок ${index + 1}`,
+          isUser: false,
+          alive: true,
+          role: ""
+        });
+      }
+
+      const roles = shuffle(roleDeck);
+
+      players.forEach((player, index) => {
+        player.role = roles[index];
+      });
+
+      const now = Date.now();
+
+      game = {
+        status: "playing",
+        phase: "night",
+        round: 1,
+        phaseStartedAt: now,
+        phaseEndsAt: now + PHASE_SECONDS.night * 1000,
+        phaseResolving: false,
+        players,
+        nightTarget: null,
+        voteTarget: null,
+        lastNightResult: null,
+        lastVoteResult: null,
+        privateNotes: [],
+        messages: [],
+        log: [],
+        chatMode: "public",
+        winner: null,
+        recorded: false
+      };
+
+      addSystem("Партия началась. Игрокам выданы роли. Наступает ночь.", "night");
+    }
+
+    function startGame() {
+      const nameInput = $("#playerName");
+      const countInput = $("#playerCount");
+
+      if (nameInput) {
+        config.name = nameInput.value.trim().slice(0, 20) || "Вы";
+      }
+
+      if (countInput) {
+        config.playerCount = Math.min(15, Math.max(5, Number(countInput.value) || 8));
+      }
+
+      if (game && game.status === "playing") {
+        const approved = window.confirm("Текущая партия будет сброшена. Начать новую?");
+        if (!approved) return;
+      }
+
+      saveData("mafiaConfig", config);
+      createGame();
+      page = "game";
+      feedback();
+      render();
+
+      toast(`Ваша роль: ${ROLE_INFO[userPlayer().role].name}`);
+    }
+
+    function setPhase(phase) {
+      if (!game || game.status !== "playing") return;
+
+      game.phase = phase;
+      game.phaseStartedAt = Date.now();
+      game.phaseEndsAt = game.phaseStartedAt + PHASE_SECONDS[phase] * 1000;
+      game.phaseResolving = false;
+
+      render();
+    }
+
+    function checkWinner() {
+      const alive = getAlivePlayers();
+      const mafiaCount = alive.filter(player => player.role === "mafia").length;
+      const townCount = alive.length - mafiaCount;
+
+      if (mafiaCount === 0) return "town";
+      if (mafiaCount >= townCount) return "mafia";
+      return null;
+    }
+
+    function finishGame(winner) {
+      if (!game || game.recorded) return;
+
+      game.status = "finished";
+      game.phase = "finished";
+      game.phaseEndsAt = null;
+      game.winner = winner;
+      game.recorded = true;
+
+      const me = userPlayer();
+      const userWon =
+        (winner === "mafia" && me.role === "mafia") ||
+        (winner === "town" && me.role !== "mafia");
+
+      stats.played += 1;
+      stats.rolePlayed[me.role] = (stats.rolePlayed[me.role] || 0) + 1;
+
+      if (userWon) {
+        stats.wins += 1;
+        stats.roleWins[me.role] = (stats.roleWins[me.role] || 0) + 1;
+      }
+
+      const resultText = winner === "mafia" ? "Победа мафии" : "Победа мирных";
+
+      history.unshift({
+        date: new Date().toISOString(),
+        role: me.role,
+        winner,
+        won: userWon,
+        result: resultText,
+        rounds: game.round,
+        playerCount: game.players.length
+      });
+
+      history = history.slice(0, 100);
+
+      saveData("mafiaStats", stats);
+      saveData("mafiaHistory", history);
+
+      addSystem(`${resultText}. Партия завершена.`, "result");
+    }
+
+    function chooseMafiaTarget(alive) {
+      const candidates = alive.filter(player => player.role !== "mafia");
+      if (!candidates.length) return null;
+
+      const important = candidates.filter(player =>
+        player.role === "sheriff" || player.role === "doctor"
+      );
+
+      if (important.length && Math.random() < 0.6) {
+        return randomItem(important);
+      }
+
+      return randomItem(candidates);
+    }
+
+    function generateDayConversation() {
+      const bots = getAlivePlayers().filter(player => !player.isUser);
+      if (!bots.length) return;
+
+      const firstSpeaker = randomItem(bots);
+      const wasKilled = game.lastNightResult && game.lastNightResult.type === "death";
+
+      const lines = wasKilled
+        ? [
+            `Ночью выбыл ${game.lastNightResult.playerName}. Надо понять, кому это было выгодно.`,
+            `Жаль, что ${game.lastNightResult.playerName} выбыл. Есть подозрения?`,
+            "Давайте обсудим вчерашние голоса."
+          ]
+        : [
+            "Эта ночь прошла тихо. Кто ведёт себя подозрительно?",
+            "Пока не понимаю, кому можно доверять.",
+            "Нужно внимательнее смотреть на голоса."
+          ];
+
+      addMessage("public", firstSpeaker.id, firstSpeaker.name, randomItem(lines));
+
+      if (bots.length > 1 && Math.random() > 0.25) {
+        const secondSpeaker = randomItem(bots.filter(player => player.id !== firstSpeaker.id));
+        const replies = [
+          "Я бы пока не спешил с выводами.",
+          "Надо обратить внимание на тех, кто мало говорит.",
+          "Давайте голосовать внимательно.",
+          "У меня есть подозрение, но пока недостаточно доказательств."
+        ];
+
+        addMessage("public", secondSpeaker.id, secondSpeaker.name, randomItem(replies));
+      }
+    }
+
+    function resolveNight() {
+      if (!game || game.status !== "playing" || game.phase !== "night") return;
+
+      const winnerBeforeNight = checkWinner();
+
+      if (winnerBeforeNight) {
+        finishGame(winnerBeforeNight);
+        render();
+        return;
+      }
+
+      const alive = getAlivePlayers();
+      const me = userPlayer();
+
+      let killTarget = null;
+
+      if (me.alive && me.role === "mafia") {
+        killTarget = alive.find(player =>
+          player.id === game.nightTarget && player.role !== "mafia"
+        ) || null;
+      }
+
+      if (!killTarget) {
+        killTarget = chooseMafiaTarget(alive);
+      }
+
+      const doctor = alive.find(player => player.role === "doctor");
+      let savedPlayerId = null;
+
+      if (doctor) {
+        if (doctor.isUser) {
+          const selected = alive.find(player => player.id === game.nightTarget);
+          if (selected) {
+            savedPlayerId = selected.id;
+          } else if (killTarget && Math.random() < 0.2) {
+            savedPlayerId = killTarget.id;
+          } else {
+            savedPlayerId = randomItem(alive)?.id || null;
+          }
+        } else if (killTarget && Math.random() < 0.25) {
+          savedPlayerId = killTarget.id;
+        } else {
+          savedPlayerId = randomItem(alive)?.id || null;
+        }
+      }
+
+      const sheriff = alive.find(player => player.role === "sheriff");
+
+      if (sheriff && sheriff.isUser) {
+        let investigated = alive.find(player =>
+          player.id === game.nightTarget && !player.isUser
+        ) || null;
+
+        if (!investigated) {
+          investigated = randomItem(alive.filter(player => !player.isUser));
+        }
+
+        if (investigated) {
+          game.privateNotes.push({
+            round: game.round,
+            name: investigated.name,
+            result: investigated.role === "mafia" ? "мафия" : "не мафия"
+          });
+        }
+      }
+
+      if (!killTarget) {
+        game.lastNightResult = {
+          type: "safe",
+          text: "Ночью никто не выбыл."
+        };
+      } else if (savedPlayerId === killTarget.id) {
+        game.lastNightResult = {
+          type: "safe",
+          text: "Ночь прошла спокойно: доктор спас цель мафии."
+        };
+      } else {
+        killTarget.alive = false;
+        game.lastNightResult = {
+          type: "death",
+          playerId: killTarget.id,
+          playerName: killTarget.name,
+          role: killTarget.role,
+          text: `Ночью выбыл игрок ${killTarget.name}.`
+        };
+      }
+
+      game.nightTarget = null;
+
+      if (game.lastNightResult.type === "death") {
+        addSystem(
+          `Наступило утро. Выбыл ${game.lastNightResult.playerName}. Его роль: ${ROLE_INFO[game.lastNightResult.role].name}.`,
+          "day"
+        );
+      } else {
+        addSystem(game.lastNightResult.text, "day");
+      }
+
+      const winner = checkWinner();
+
+      if (winner) {
+        finishGame(winner);
+        feedback();
+        render();
+        return;
+      }
+
+      generateDayConversation();
+      game.chatMode = "public";
+      setPhase("day");
+      feedback();
+    }
+
+    function startVoteAutomatically() {
+      if (!game || game.phase !== "day") return;
+
+      addSystem("Обсуждение завершено. Началось голосование.", "vote");
+      game.voteTarget = null;
+      game.chatMode = "public";
+      setPhase("vote");
+    }
+
+    function chooseBotVote(bot, alive) {
+      let candidates = alive.filter(player => player.id !== bot.id);
+
+      if (bot.role === "mafia") {
+        const nonMafia = candidates.filter(player => player.role !== "mafia");
+        if (nonMafia.length) candidates = nonMafia;
+      }
+
+      return randomItem(candidates);
+    }
+
+    function resolveVote() {
+      if (!game || game.status !== "playing" || game.phase !== "vote") return;
+
+      const alive = getAlivePlayers();
+      const me = userPlayer();
+      const tally = {};
+
+      alive.forEach(player => {
+        if (player.isUser) {
+          if (me.alive) {
+            let target = alive.find(candidate => candidate.id === game.voteTarget);
+
+            if (!target) {
+              target = randomItem(alive.filter(candidate => !candidate.isUser));
+            }
+
+            if (target) {
+              tally[target.id] = (tally[target.id] || 0) + 1;
+            }
+          }
+
+          return;
+        }
+
+        const target = chooseBotVote(player, alive);
+        if (target) {
+          tally[target.id] = (tally[target.id] || 0) + 1;
+        }
+      });
+
+      const maxVotes = Math.max(0, ...Object.values(tally));
+      const leaders = Object.keys(tally).filter(id => tally[id] === maxVotes && maxVotes > 0);
+      const tied = leaders.length > 1;
+      let eliminated = null;
+
+      if (leaders.length === 1) {
+        eliminated = game.players.find(player => player.id === leaders[0]) || null;
+        if (eliminated) eliminated.alive = false;
+      }
+
+      game.lastVoteResult = {
+        tied,
+        eliminatedId: eliminated ? eliminated.id : null,
+        eliminatedName: eliminated ? eliminated.name : null,
+        eliminatedRole: eliminated ? eliminated.role : null,
+        counts: alive.map(player => ({
+          id: player.id,
+          name: player.name,
+          isUser: player.isUser,
+          votes: tally[player.id] || 0
+        }))
+      };
+
+      game.voteTarget = null;
+
+      if (tied) {
+        addSystem("Голосование завершилось ничьей. Никто не выбыл.", "vote");
+      } else if (eliminated) {
+        addSystem(
+          `По итогам голосования выбыл ${eliminated.name}. Его роль: ${ROLE_INFO[eliminated.role].name}.`,
+          "vote"
+        );
+      } else {
+        addSystem("В этом раунде никто не выбыл.", "vote");
+      }
+
+      const winner = checkWinner();
+
+      if (winner) {
+        finishGame(winner);
+      } else {
+        setPhase("results");
+      }
+
+      feedback();
+      render();
+    }
+
+    function nextNightAutomatically() {
+      if (!game || game.phase !== "results") return;
+
+      game.round += 1;
+      game.nightTarget = null;
+      game.voteTarget = null;
+      game.chatMode = "public";
+
+      addSystem(`Наступила ночь ${game.round}.`, "night");
+      setPhase("night");
+    }
+
+    function handlePhaseTimeout() {
+      if (!game || game.status !== "playing") return;
+
+      game.phaseResolving = true;
+
+      switch (game.phase) {
+        case "night":
+          resolveNight();
+          break;
+        case "day":
+          startVoteAutomatically();
+          break;
+        case "vote":
+          resolveVote();
+          break;
+        case "results":
+          nextNightAutomatically();
+          break;
+      }
+    }
+
+    function tickPhase() {
+      if (!game || game.status !== "playing" || !game.phaseEndsAt) return;
+
+      refreshClockUI();
+
+      if (Date.now() >= game.phaseEndsAt && !game.phaseResolving) {
+        handlePhaseTimeout();
+      }
+    }
+
+    function sendChatMessage(event) {
+      event.preventDefault();
+
+      if (!game) return;
+
+      const input = $("#chatInput");
+      const text = input ? input.value.trim() : "";
+      if (!text) return;
+
+      const me = userPlayer();
+      const channel = game.chatMode || "public";
+
+      const canSend =
+        game.status === "playing" &&
+        me.alive &&
+        (channel === "mafia"
+          ? me.role === "mafia"
+          : game.phase === "day");
+
+      if (!canSend) {
+        toast("Сейчас нельзя отправить сообщение.");
+        return;
+      }
+
+      addMessage(channel, "user", me.name, text);
+
+      const bots = getAlivePlayers().filter(player =>
+        !player.isUser &&
+        (channel === "public" || player.role === "mafia")
+      );
+
+      if (bots.length && Math.random() > 0.25) {
+        const speaker = randomItem(bots);
+        const replies = channel === "mafia"
+          ? [
+              "Понял. Буду действовать осторожно.",
+              "Согласен, постараюсь поддержать эту версию.",
+              "Нужно не привлекать к себе внимания."
+            ]
+          : [
+              "Я услышал. Давайте посмотрим на голоса.",
+              "Возможно, но пока нужны доказательства.",
+              "Понял. Есть ещё мнения?",
+              "Давайте обсудим это перед голосованием."
+            ];
+
+        addMessage(channel, speaker.id, speaker.name, randomItem(replies));
+      }
+
+      render();
+    }
+
+    document.addEventListener("click", event => {
+      const actionButton = event.target.closest("[data-action]");
+
+      if (actionButton) {
+        const action = actionButton.dataset.action;
+
+        if (action === "start-game") {
+          startGame();
+          return;
+        }
+
+        if (action === "select-night-target" && game && game.phase === "night") {
+          game.nightTarget = actionButton.dataset.id;
+          feedback();
+          render();
+          return;
+        }
+
+        if (action === "select-vote-target" && game && game.phase === "vote") {
+          game.voteTarget = actionButton.dataset.id;
+          feedback();
+          render();
+          return;
+        }
+
+        if (action === "chat-mode" && game) {
+          game.chatMode = actionButton.dataset.mode;
+          render();
+          return;
+        }
+
+        if (action === "reset-stats") {
+          const approved = window.confirm("Удалить статистику и журнал всех партий?");
+          if (!approved) return;
+
+          stats.played = 0;
+          stats.wins = 0;
+          stats.rolePlayed = {};
+          stats.roleWins = {};
+          history = [];
+
+          saveData("mafiaStats", stats);
+          saveData("mafiaHistory", history);
+          toast("Статистика очищена.");
+          render();
+        }
+
+        return;
+      }
+
+      const pageButton = event.target.closest("[data-page]");
+
+      if (pageButton) {
+        page = pageButton.dataset.page;
+        render();
+      }
     });
 
-    // Выбор игрока на экране голосования
-    document.querySelectorAll(".vote-row").forEach((row) => {
-      row.addEventListener("click", () => {
-        const container = row.parentElement;
-        container.querySelectorAll(".vote-row").forEach((item) => {
-          item.classList.remove("active");
-        });
-        row.classList.add("active");
-      });
+    document.addEventListener("change", event => {
+      const target = event.target;
+
+      if (target.id === "playerCount") {
+        config.playerCount = Math.min(15, Math.max(5, Number(target.value) || 8));
+        saveData("mafiaConfig", config);
+
+        const preview = $("#rolePreview");
+        const countLabel = $("#lobbyCount");
+
+        if (preview) preview.innerHTML = renderRoleTiles(config.playerCount);
+        if (countLabel) countLabel.textContent = `${config.playerCount} игроков`;
+      }
+
+      if (target.matches("[data-setting]")) {
+        settings[target.dataset.setting] = target.checked;
+        saveData("mafiaSettings", settings);
+        toast("Настройка сохранена.");
+      }
     });
+
+    document.addEventListener("submit", event => {
+      if (event.target.id === "chatForm") {
+        sendChatMessage(event);
+        return;
+      }
+
+      if (event.target.id === "profileForm") {
+        event.preventDefault();
+
+        const input = $("#settingName");
+        config.name = input.value.trim().slice(0, 20) || "Вы";
+        saveData("mafiaConfig", config);
+
+        if (game) {
+          const me = userPlayer();
+          if (me) me.name = config.name;
+        }
+
+        toast("Имя сохранено.");
+        render();
+      }
+    });
+
+    render();
+    setInterval(tickPhase, 250);
   </script>
 </body>
 </html>
-```
+
+
